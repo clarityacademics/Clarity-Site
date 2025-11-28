@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Clarity Cohort | Small-Group Learning Labs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- BRAND FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            /* Brand colors */
+            --dusty-indigo: #3A5167;
+            --dark-indigo: #2E4252;
+            --moss-green: #8A9A5B;
+            --dark-green: #72804A;
+            --rich-sand: #DDBE9B;
+            --light-sand: #EFE1CD;
+            --oat-cream: #EFE9E1;
+            --rust-clay: #B26A4F;
+            --dark-clay: #8F533F;
+            --white: #ffffff;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+            --font-sans: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+
+            /* Layout */
+            --section-padding: 6rem 2rem;
+            --container-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--oat-cream);
+            color: var(--dusty-indigo);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            line-height: 1.2;
+            color: var(--dusty-indigo);
+        }
+
+        p {
+            font-family: var(--font-sans);
+            color: var(--dark-indigo);
+            font-size: 1rem;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Subtle grain texture (same as other pages) */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQwIiBoZWlnaHQ9IjY0MCIgdmlld0JveD0iMCAwIDY0MCA2NDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGZpbHRlciBpZD0ibm9pc2UiPfeKU2VkIEZ1bGxYb3VyIE5vaXNlIERhdGEgSGVyZS4uLjwvZmlsdGVyPjxyZWN0IHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjkiLz48L3N2Zz4=');
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        /* Buttons (same base as mission page) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.5rem;
+            border-radius: 999px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--rust-clay);
+            color: var(--oat-cream);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+            background-color: var(--dark-clay);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--rust-clay);
+            border: 1px solid rgba(178,106,79,0.5);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.85);
+        }
+
+        .btn-wrapper {
+            display: inline-flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* NAVBAR — copied from the Mission page so it stays consistent */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 2rem;
+            backdrop-filter: blur(14px);
+            background: rgba(239,233,225,0.92);
+            border-bottom: 1px solid rgba(58,81,103,0.12);
+            transition: 0.25s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(239,233,225,0.98);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .brand-text h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            letter-spacing: 0.04em; /* NOT all caps */
+        }
+
+        .brand-text span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--moss-green);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--dark-indigo);
+        }
+
+        .nav-links a:hover {
+            color: var(--rust-clay);
+        }
+
+        .hamburger {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            border: 1px solid rgba(58,81,103,0.25);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background-color: var(--dusty-indigo);
+            transition: 0.2s ease;
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(10,16,24,0.9);
+            backdrop-filter: blur(18px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            color: var(--oat-cream);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .mobile-menu .btn-primary {
+            background-color: var(--oat-cream);
+            color: var(--rust-clay);
+        }
+
+        /* GENERIC SECTION STRUCTURE */
+        section.section {
+            padding: var(--section-padding);
+        }
+
+        .section-tag {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.75rem;
+            color: var(--moss-green);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-intro {
+            max-width: 42rem;
+            font-size: 1.02rem;
+            line-height: 1.8;
+            margin-top: 0.8rem;
+        }
+
+        /* PAGE HERO – premium, “blue + sand” */
+        .page-hero {
+            padding: 7rem 2rem 3.5rem;
+        }
+
+        .page-hero-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .cohort-hero {
+            background: radial-gradient(circle at top left, rgba(221,190,155,0.38), transparent 55%),
+                        linear-gradient(135deg, #1f3040 0%, #2E4252 55%, #3A5167 100%);
+            color: var(--oat-cream);
+        }
+
+        .cohort-hero h1,
+        .cohort-hero p {
+            color: var(--oat-cream);
+        }
+
+        .page-kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-size: 0.76rem;
+            color: var(--rich-sand);
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+        }
+
+        .page-title {
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-title span {
+            display: block;
+            color: var(--rich-sand);
+        }
+
+        .page-hero-text p {
+            max-width: 34rem;
+            font-size: 1.02rem;
+            color: rgba(239,233,225,0.9);
+        }
+
+        .hero-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.3rem 0 1.8rem;
+        }
+
+        .hero-pill {
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(239,233,225,0.2);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(239,233,225,0.85);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero-pill i {
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero-meta-card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 1.6rem 1.5rem;
+            border: 1px solid rgba(247,237,223,0.15);
+            box-shadow: 0 16px 45px rgba(0,0,0,0.35);
+            color: var(--oat-cream);
+        }
+
+        .hero-meta-card .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(247,237,223,0.8);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .hero-meta-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+            color: var(--rich-sand);
+        }
+
+        .hero-meta-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(247,237,223,0.9);
+        }
+
+        .hero-meta-card small {
+            display: block;
+            margin-top: 0.45rem;
+            font-size: 0.8rem;
+            color: rgba(247,237,223,0.7);
+        }
+
+        .hero-meta-card.emphasis {
+            background: linear-gradient(135deg, rgba(221,190,155,0.18), rgba(32,48,64,0.95));
+            border-color: rgba(221,190,155,0.45);
+        }
+
+        /* Simple in-page subnav (optional scroll anchors) */
+        .cohort-subnav {
+            margin-top: 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .cohort-subnav a {
+            text-decoration: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(247,237,223,0.28);
+            color: rgba(247,237,223,0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+        }
+
+        .cohort-subnav a:hover {
+            background: rgba(247,237,223,0.12);
+        }
+
+        /* OVERVIEW / WHY COHORT */
+        .overview-section {
+            background: #fff;
+        }
+
+        .overview-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .overview-body p + p {
+            margin-top: 1rem;
+        }
+
+        .overview-body strong {
+            font-weight: 600;
+            color: var(--dusty-indigo);
+        }
+
+        .overview-card {
+            background: var(--light-sand);
+            border-radius: 20px;
+            padding: 1.8rem 1.75rem 1.7rem;
+            border: 1px solid rgba(58,81,103,0.12);
+            box-shadow: 0 14px 40px rgba(58,81,103,0.08);
+        }
+
+        .overview-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .overview-card p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .bullet-points {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.25rem;
+        }
+
+        .bullet-points li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            color: var(--dark-indigo);
+        }
+
+        .bullet-points i {
+            color: var(--rust-clay);
+            font-size: 1.1rem;
+            margin-top: 0.15rem;
+        }
+
+        .overview-image {
+            margin-top: 1.4rem;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(58,81,103,0.15);
+        }
+
+        .overview-image-placeholder {
+            width: 100%;
+            height: 230px;
+            background: linear-gradient(135deg, var(--rich-sand), var(--light-sand));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: rgba(58,81,103,0.7);
+        }
+
+        /* FORMATS (types of cohorts) */
+        .formats-section {
+            background: var(--oat-cream);
+        }
+
+        .formats-header {
+            max-width: 42rem;
+            margin: 0 auto 2.5rem;
+        }
+
+        .formats-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .format-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.8rem 1.7rem 1.7rem;
+            border: 1px solid rgba(58,81,103,0.08);
+            box-shadow: 0 14px 40px rgba(58,81,103,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .format-label {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+            font-weight: 600;
+        }
+
+        .format-card h3 {
+            font-size: 1.25rem;
+        }
+
+        .format-meta {
+            font-size: 0.86rem;
+            color: var(--dark-green);
+        }
+
+        .format-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.7rem;
+        }
+
+        .format-list li {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .format-list li::before {
+            content: "•";
+            color: var(--rust-clay);
+            margin-top: 0.1rem;
+        }
+
+        .format-footnote {
+            font-size: 0.78rem;
+            color: var(--dark-green);
+            margin-top: 0.7rem;
+        }
+
+        /* INSIDE A LAB (session flow) */
+        .flow-section {
+            background: #fff;
+        }
+
+        .flow-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .flow-steps {
+            margin-top: 2.2rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .flow-timeline {
+            list-style: none;
+            padding: 0;
+        }
+
+        .flow-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.9rem 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.4rem;
+        }
+
+        .flow-step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            background: var(--rich-sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-indigo);
+        }
+
+        .flow-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .flow-step p {
+            font-size: 0.92rem;
+        }
+
+        .flow-note {
+            font-size: 0.85rem;
+            color: var(--dark-green);
+            margin-top: 0.8rem;
+        }
+
+        .flow-image {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(58,81,103,0.16);
+        }
+
+        .flow-image-placeholder {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, var(--dusty-indigo), #1f2e3a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: rgba(239,233,225,0.8);
+        }
+
+        /* WHO IT'S FOR / NOT FOR */
+        .fit-section {
+            background: var(--rich-sand);
+        }
+
+        .fit-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2.3rem;
+        }
+
+        .fit-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 1.7rem 1.6rem;
+            border: 1px solid rgba(58,81,103,0.12);
+            box-shadow: 0 14px 40px rgba(58,81,103,0.14);
+        }
+
+        .fit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .fit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .fit-list li {
+            font-size: 0.93rem;
+            margin-bottom: 0.45rem;
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .fit-list li::before {
+            content: "–";
+            color: var(--dusty-indigo);
+            margin-top: 0.1rem;
+        }
+
+        /* RHYTHM & CALENDAR */
+        .rhythm-section {
+            background: #fff;
+        }
+
+        .rhythm-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 2.8rem;
+            align-items: start;
+        }
+
+        .rhythm-table {
+            background: var(--light-sand);
+            border-radius: 20px;
+            padding: 1.8rem 1.7rem;
+            border: 1px solid rgba(58,81,103,0.16);
+            box-shadow: 0 14px 40px rgba(58,81,103,0.08);
+            font-size: 0.92rem;
+        }
+
+        .rhythm-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(58,81,103,0.12);
+        }
+
+        .rhythm-row:last-child {
+            border-bottom: none;
+        }
+
+        .rhythm-label {
+            font-weight: 600;
+            color: var(--dusty-indigo);
+        }
+
+        .rhythm-value {
+            text-align: right;
+            color: var(--dark-indigo);
+        }
+
+        .rhythm-note {
+            font-size: 0.85rem;
+            color: var(--dark-green);
+            margin-top: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: var(--oat-cream);
+        }
+
+        .faq-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .faq-grid {
+            margin-top: 2.2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        details.faq-item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1rem 1.1rem;
+            border: 1px solid rgba(58,81,103,0.12);
+            font-size: 0.94rem;
+        }
+
+        details.faq-item summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+        }
+
+        details.faq-item[open] {
+            box-shadow: 0 14px 40px rgba(58,81,103,0.06);
+        }
+
+        details.faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.faq-item summary::after {
+            content: "+";
+            float: right;
+            font-weight: 600;
+            color: var(--rust-clay);
+        }
+
+        details.faq-item[open] summary::after {
+            content: "–";
+        }
+
+        details.faq-item p {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        /* CTA / CONTACT */
+        .cta-section {
+            padding: 5rem 2rem;
+            background: var(--dark-indigo);
+            color: var(--oat-cream);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.6rem;
+            color: var(--oat-cream);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            max-width: 34rem;
+            margin: 0 auto 2.5rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.05rem;
+        }
+
+        .cta-section .btn-primary {
+            background-color: var(--oat-cream);
+            color: var(--rust-clay);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .cta-section .btn-primary:hover {
+            background-color: #fff;
+        }
+
+        /* FOOTER (same structure as other pages) */
+        footer {
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-col h4 {
+            color: var(--rich-sand);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.78);
+        }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.6rem;
+            transition: 0.25s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--rich-sand);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.75rem;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            nav {
+                padding-inline: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-hero {
+                padding: 6rem 1.5rem 3.2rem;
+            }
+
+            .page-hero-inner {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 2.2rem;
+            }
+
+            .hero-meta {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .hero-meta-card {
+                flex: 1 1 220px;
+            }
+
+            section.section {
+                padding: 4.5rem 1.5rem;
+            }
+
+            .overview-grid,
+            .flow-steps,
+            .rhythm-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .formats-section,
+            .fit-section,
+            .faq-section {
+                padding-inline: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 2.1rem;
+            }
+
+            .page-hero-text p {
+                font-size: 0.98rem;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+            }
+
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta-section p {
+                font-size: 0.98rem;
+            }
+
+            .cohort-subnav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <!-- MOBILE MENU (links to site-level pages) -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="/mission.html" onclick="toggleMenu()">Mission</a>
+        <a href="/services.html" onclick="toggleMenu()">Services</a>
+        <a href="/about.html" onclick="toggleMenu()">About</a>
+        <div class="btn-wrapper" style="margin-top: 1rem;">
+            <a href="/elite" onclick="toggleMenu()" class="btn btn-primary">Book Session</a>
+        </div>
+    </div>
+
+    <!-- NAV (kept consistent with Mission page nav styling) -->
+    <nav id="navbar">
+        <a href="/index.html" class="brand-lockup">
+            <img src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg"
+                 alt="Clarity Academics Logo"
+                 class="logo-svg">
+            <div class="brand-text">
+                <h4>Clarity Academics</h4>
+                <span>Clarity. Confidence. Calling.</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="/mission.html">Mission</a>
+            <a href="/services.html">Services</a>
+            <a href="/about.html">About</a>
+            <div class="btn-wrapper">
+                <a href="/elite"
+                   class="btn btn-primary"
+                   style="padding: 0.7rem 1.6rem; font-size: 0.78rem; color: var(--oat-cream);">
+                    Book Insight Session
+                </a>
+            </div>
+        </div>
+
+        <button class="hamburger"
+                id="hamburger"
+                aria-label="Toggle menu"
+                aria-controls="mobileMenu"
+                aria-expanded="false"
+                onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <header id="hero" class="page-hero cohort-hero">
+        <div class="page-hero-inner container">
+            <div class="page-hero-text">
+                <div class="page-kicker">Clarity Cohort • Small-Group Learning Labs</div>
+                <h1 class="page-title">
+                    School feels lighter<span>when your student isn’t the only one in the room.</span>
+                </h1>
+                <p>
+                    Clarity Cohort is a premium, small-group lab for students who learn best
+                    when they can see how other minds work. We keep groups tiny, the environment
+                    calm, and the expectations clear—so questions feel normal, not embarrassing,
+                    and complex math and science start to feel doable again.
+                </p>
+
+                <div class="hero-pill-row">
+                    <span class="hero-pill">
+                        <i class="ph ph-users-three" aria-hidden="true"></i>
+                        3–6 students per lab
+                    </span>
+                    <span class="hero-pill">
+                        <i class="ph ph-calendar-check" aria-hidden="true"></i>
+                        Weekly live sessions
+                    </span>
+                    <span class="hero-pill">
+                        <i class="ph ph-brain" aria-hidden="true"></i>
+                        High-touch coaching
+                    </span>
+                    <span class="hero-pill">
+                        <i class="ph ph-shield-check" aria-hidden="true"></i>
+                        Calm, values-safe space
+                    </span>
+                </div>
+
+                <div class="btn-wrapper">
+                    <a href="#contact" class="btn btn-primary">
+                        Join the Cohort Interest List
+                    </a>
+                    <a href="/services.html" class="btn btn-secondary">
+                        Compare All Programs
+                    </a>
+                </div>
+
+                <div class="cohort-subnav" aria-label="Jump to sections">
+                    <a href="#overview">Overview</a>
+                    <a href="#formats">Formats</a>
+                    <a href="#inside-lab">Inside a Lab</a>
+                    <a href="#fit">Who It’s For</a>
+                    <a href="#rhythm">Rhythm</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+
+            <div class="hero-meta" aria-label="Cohort at a glance">
+                <div class="hero-meta-card emphasis">
+                    <div class="meta-label">Lab Snapshot</div>
+                    <h3>Premium, small, and highly guided.</h3>
+                    <p>
+                        Labs are designed for students who need structure and clarity, but
+                        don’t necessarily need a full 1:1 program. We keep the pace steady,
+                        the atmosphere low-drama, and the expectations spelled out.
+                    </p>
+                    <small>Built for students who think deeply, notice a lot, or shut down in noisy classrooms.</small>
+                </div>
+                <div class="hero-meta-card">
+                    <div class="meta-label">Best Fit</div>
+                    <p>
+                        Ideal for upper middle school and high school students in
+                        algebra, geometry, precalculus, physics, and similar courses.
+                        Labs are grouped by level, not age alone.
+                    </p>
+                    <small>See current subjects and sections at the bottom of this page.</small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="section overview-section">
+        <div class="overview-grid">
+            <div class="overview-body">
+                <span class="section-tag">Why Clarity Cohort Works</span>
+                <h2>Practice, not performance. A room where questions are expected.</h2>
+                <p class="section-intro">
+                    Most classrooms are built around speed and performance. Clarity Cohort flips the script:
+                    we slow down, zoom in on what actually confuses students, and give them time to practice—
+                    in a space where “I still don’t get it yet” is a normal sentence.
+                </p>
+                <p>
+                    Every lab is a blend of live teaching, guided problem solving, and quiet work blocks,
+                    so students can watch examples, try it themselves, and get feedback in real time.
+                    We pay attention to energy, sensory load, and nervous-system pacing—not just the syllabus.
+                </p>
+                <p>
+                    The goal isn’t just “keeping up.” It’s helping your student feel steady, capable, and
+                    less alone in the way they learn.
+                </p>
+            </div>
+
+            <aside class="overview-card">
+                <h3>Designed for thoughtful, sensitive learners.</h3>
+                <p>
+                    Many of our students notice everything, think deeply, or get overwhelmed in fast,
+                    loud environments. Cohorts are intentionally small and structured so their brains
+                    have room to actually think.
+                </p>
+                <ul class="bullet-points">
+                    <li>
+                        <i class="ph ph-ear-slash" aria-hidden="true"></i>
+                        <span>Low-stimulus, high-structure sessions that stay predictable week to week.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-chats-circle" aria-hidden="true"></i>
+                        <span>Room to say “this part still doesn’t make sense” without being spotlighted.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-steps" aria-hidden="true"></i>
+                        <span>Clear, stepwise explanations for complex problems—no hand-waving or jargon.</span>
+                    </li>
+                </ul>
+                <div class="overview-image" aria-hidden="true">
+                    <!-- Replace with a real photo of a small-group lab when ready -->
+                    <div class="overview-image-placeholder">
+                        Add small-group lab photo here
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- FORMATS -->
+    <section id="formats" class="section formats-section">
+        <div class="formats-header">
+            <span class="section-tag">Cohort Formats</span>
+            <h2>Three ways to plug into Clarity Cohort.</h2>
+            <p class="section-intro">
+                Each cohort shares the same DNA—small groups, steady rhythm, and clear coaching—
+                but the intensity and focus can shift based on your student’s needs and course load.
+            </p>
+        </div>
+
+        <div class="formats-grid">
+            <article class="format-card">
+                <div class="format-label">Foundations Labs</div>
+                <h3>Core Math &amp; Science</h3>
+                <p class="format-meta">Algebra, Geometry, Physical Science &amp; similar.</p>
+                <ul class="format-list">
+                    <li>Perfect for students who “get it in class” but lose it on homework and tests.</li>
+                    <li>Weekly review of core concepts plus guided practice on current assignments.</li>
+                    <li>Simple planning tools so they know what to do between labs.</li>
+                </ul>
+                <p class="format-footnote">
+                    Great starting point if you’re not sure whether your student needs 1:1 or group.
+                </p>
+            </article>
+
+            <article class="format-card">
+                <div class="format-label">Honors &amp; AP Labs</div>
+                <h3>Fast-Paced, High-Level Courses</h3>
+                <p class="format-meta">Honors math, AP Physics, and similar rigorous tracks.</p>
+                <ul class="format-list">
+                    <li>Focus on multi-step problems, free-response questions, and test strategy.</li>
+                    <li>Space to work through “I can start it, but I can’t finish it” questions.</li>
+                    <li>Light touch on mindset and exam anxiety without being therapy-y.</li>
+                </ul>
+                <p class="format-footnote">
+                    Pairs well with 1:1 support during heavy exam seasons if needed.
+                </p>
+            </article>
+
+            <article class="format-card">
+                <div class="format-label">Skills Labs</div>
+                <h3>Executive Function &amp; Study Systems</h3>
+                <p class="format-meta">For students who need more rhythm than rescue.</p>
+                <ul class="format-list">
+                    <li>Weekly planning, check-ins, and “show your system” time.</li>
+                    <li>Gentle accountability for missing work, long-term projects, and test prep.</li>
+                    <li>Built especially for students with busy brains or low-frustration tolerance.</li>
+                </ul>
+                <p class="format-footnote">
+                    This track can stand alone or run alongside 1:1 or other Cohort labs.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- INSIDE A LAB -->
+    <section id="inside-lab" class="section flow-section">
+        <div class="flow-inner">
+            <span class="section-tag">Inside a Clarity Cohort Session</span>
+            <h2>What a 60–75 minute lab actually looks like.</h2>
+            <p class="section-intro">
+                No filler, no busywork. Every lab follows a steady rhythm so your student knows
+                what to expect and where their attention should be.
+            </p>
+
+            <div class="flow-steps">
+                <div>
+                    <ul class="flow-timeline">
+                        <li class="flow-step">
+                            <div class="flow-step-number">1</div>
+                            <div>
+                                <h3>Warm start &amp; check-in (5–10 minutes)</h3>
+                                <p>
+                                    Students settle in, name wins and roadblocks from the week, and
+                                    quickly surface any urgent questions. Cameras on are encouraged,
+                                    but we keep it low-pressure.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-number">2</div>
+                            <div>
+                                <h3>Concept spotlight (15–20 minutes)</h3>
+                                <p>
+                                    We teach or re-teach one key concept using clear, stepwise examples.
+                                    Students can ask “small” questions here before we move into practice.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-number">3</div>
+                            <div>
+                                <h3>Guided practice (20–25 minutes)</h3>
+                                <p>
+                                    The group works through carefully chosen problems together. We slow
+                                    down on the parts that normally get rushed, and show multiple ways
+                                    of thinking about the same question.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-number">4</div>
+                            <div>
+                                <h3>Independent reps &amp; quick coaching (15–20 minutes)</h3>
+                                <p>
+                                    Students work quietly while we circulate, troubleshoot, and coach.
+                                    This is where we catch the “I thought I understood, but…” moments.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-number">5</div>
+                            <div>
+                                <h3>Next steps &amp; simple plan (5 minutes)</h3>
+                                <p>
+                                    We leave with a short, realistic plan for what to do before the
+                                    next lab—no 12-step overhaul, just concrete next moves.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="flow-note">
+                        Families receive clear expectations for out-of-lab work and optional
+                        updates during heavier academic seasons.
+                    </p>
+                </div>
+
+                <div class="flow-image" aria-hidden="true">
+                    <!-- Replace this placeholder with a real photo or illustration -->
+                    <div class="flow-image-placeholder">
+                        Add “live lab” screenshot or illustration here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHO IT'S FOR / NOT FOR -->
+    <section id="fit" class="section fit-section">
+        <div class="fit-inner">
+            <span class="section-tag">Fit Check</span>
+            <h2>Who thrives in Clarity Cohort—and who might need something different.</h2>
+            <p class="section-intro">
+                Honest fit matters more than filling a roster. Cohort is intentionally small and
+                high-touch, so we’re protective of the room and the experience for every student.
+            </p>
+
+            <div class="fit-grid">
+                <article class="fit-card">
+                    <h3>Strong fit</h3>
+                    <ul class="fit-list">
+                        <li>Students who understand the big picture but get lost in the details or steps.</li>
+                        <li>Kids who are quieter in class but open up in smaller, calmer groups.</li>
+                        <li>Thinkers who ask deep questions and sometimes feel “too much” in typical settings.</li>
+                        <li>Students who benefit from gentle accountability and external structure.</li>
+                    </ul>
+                </article>
+
+                <article class="fit-card">
+                    <h3>Better for 1:1 (Clarity Core or Elite)</h3>
+                    <ul class="fit-list">
+                        <li>Students with significant skill gaps across multiple years of content.</li>
+                        <li>Learners who fully shut down in any group setting, even very small ones.</li>
+                        <li>Situations where school stress is impacting sleep, appetite, or daily functioning.</li>
+                        <li>Families who need an intensive, customized plan and close weekly parent coaching.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- RHYTHM & CALENDAR -->
+    <section id="rhythm" class="section rhythm-section">
+        <div class="rhythm-inner">
+            <div>
+                <span class="section-tag">Rhythm &amp; Calendar</span>
+                <h2>Steady, seasonal labs—not endless commitments.</h2>
+                <p class="section-intro">
+                    Clarity Cohorts run in clear seasons—Fall, Spring, and Summer—so everyone knows
+                    when labs start, when they pause, and what success looks like for that window.
+                    You’ll always know exactly what you’re saying “yes” to.
+                </p>
+                <p>
+                    Exact times and subjects shift each year based on demand. You can see the current
+                    options on the Services page or by joining the interest list below.
+                </p>
+            </div>
+
+            <aside class="rhythm-table" aria-label="Typical Cohort structure">
+                <div class="rhythm-row">
+                    <div class="rhythm-label">Group size</div>
+                    <div class="rhythm-value">3–6 students per lab</div>
+                </div>
+                <div class="rhythm-row">
+                    <div class="rhythm-label">Session length</div>
+                    <div class="rhythm-value">60–75 minutes</div>
+                </div>
+                <div class="rhythm-row">
+                    <div class="rhythm-label">Frequency</div>
+                    <div class="rhythm-value">Once per week</div>
+                </div>
+                <div class="rhythm-row">
+                    <div class="rhythm-label">Typical season</div>
+                    <div class="rhythm-value">8–14 weeks</div>
+                </div>
+                <div class="rhythm-row">
+                    <div class="rhythm-label">Mode</div>
+                    <div class="rhythm-value">Live online (camera-friendly, not camera-policed)</div>
+                </div>
+                <p class="rhythm-note">
+                    Current pricing and dates live on the main Services page so everything stays in one place.
+                </p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq-section">
+        <div class="faq-inner">
+            <span class="section-tag">Questions Parents Ask</span>
+            <h2>Quick answers before you apply.</h2>
+
+            <div class="faq-grid">
+                <details class="faq-item">
+                    <summary>Will my student still get individual attention in a group?</summary>
+                    <p>
+                        Yes. Groups are intentionally tiny so each student can ask questions and get direct
+                        coaching. Cohorts are best for students who don’t need the entire time to themselves,
+                        but still benefit from a tutor who actually knows them.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What if my student is anxious or shy?</summary>
+                    <p>
+                        That’s very common here. We keep the energy calm, give students time to warm up, and
+                        never force participation. Many of our quieter students eventually start leading
+                        conversations because they finally feel safe to think out loud.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How do you group students?</summary>
+                    <p>
+                        We group primarily by course level and what the student needs from the lab—more content
+                        support, more systems, or both. Age and grade matter, but they aren’t the only filter.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can my student switch to 1:1 if they need more?</summary>
+                    <p>
+                        Absolutely. If we notice that a student would benefit more from Clarity Core or Clarity Elite,
+                        we’ll share that with you and help you decide next steps before renewing for another season.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do you talk about faith in Cohort sessions?</summary>
+                    <p>
+                        Cohort labs are academically focused and welcoming to families who value both rigorous
+                        thinking and a grounded moral framework. We don’t preach, but we do hold a calm,
+                        respectful space that’s aligned with the broader heart of Clarity Academics.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Where can I see current pricing?</summary>
+                    <p>
+                        Pricing is kept on the main Services page so it stays up to date. After you join the
+                        interest list, we’ll send you the current options, dates, and investment for each track.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section id="contact" class="cta-section">
+        <div class="container" style="text-align: center;">
+            <h2>Want a Cohort seat held for your student?</h2>
+            <p>
+                Join the interest list for Clarity Cohort. You’ll receive current lab options, dates,
+                and pricing—and we’ll help you decide whether a cohort or 1:1 path makes the most sense
+                for this season.
+            </p>
+            <div class="btn-wrapper" style="justify-content: center;">
+                <!-- Update this link to your actual form or Calendly -->
+                <a href="/group-signup" class="btn btn-primary">
+                    Join the Cohort Interest List
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clarity Academics</h4>
+                    <p>Lexington, KY<br>Online Worldwide</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <a href="/elite.html">Elite</a>
+                    <a href="/services.html#clarity-core">Core</a>
+                    <a href="/cohort.html">Cohort</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:hello@clarityacademics.com">hello@clarityacademics.com</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © <span id="year"></span> Clarity Academics. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MINIMAL SCRIPTS (nav + mobile menu) -->
+    <script>
+        const navbar = document.getElementById('navbar');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburger = document.getElementById('hamburger');
+        let previousBodyOverflow = '';
+
+        function syncBodyPadding() {
+            if (!navbar) return;
+            document.body.style.paddingTop = navbar.offsetHeight + 'px';
+        }
+
+        function toggleMenu() {
+            const isActive = mobileMenu.classList.toggle('active');
+
+            if (isActive) {
+                previousBodyOverflow = document.body.style.overflow || '';
+                document.body.style.overflow = 'hidden';
+                hamburger.setAttribute('aria-expanded', 'true');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+            } else {
+                document.body.style.overflow = previousBodyOverflow;
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!navbar) return;
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        window.addEventListener('load', () => {
+            syncBodyPadding();
+            const yearSpan = document.getElementById('year');
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        });
+
+        window.addEventListener('resize', syncBodyPadding);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>
