@@ -39,9 +39,9 @@
 
         /* --- RESET & BASE STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-       
+        
         html { scroll-behavior: smooth; }
-       
+        
         body {
             background-color: var(--oat-cream);
             color: var(--dusty-indigo);
@@ -51,7 +51,8 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        body.wix-frame { overflow-y: hidden; }
+        /* body.wix-frame removed */
+
         body.page-inactive * {
             animation-play-state: paused !important;
             transition: none !important;
@@ -147,7 +148,7 @@
         /* --- MOBILE MENU (Hidden on Desktop) --- */
         .hamburger { display: none; cursor: pointer; z-index: 1002; flex-direction: column; gap: 6px; background: transparent; border: none; }
         .bar { width: 30px; height: 3px; background-color: var(--dusty-indigo); transition: 0.3s; border-radius: 3px; }
-       
+        
         .mobile-menu {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: var(--oat-cream);
@@ -602,50 +603,37 @@
     </style>
 </head>
 <body>
-    <!-- Add wix-frame class if embedded in iframe -->
-    <script>
-        (function(){
-            try {
-                if (window.self !== window.top) {
-                    document.documentElement.classList.add('in-iframe');
-                    document.body.classList.add('wix-frame');
-                }
-            } catch (e) {
-                document.body.classList.add('wix-frame');
-            }
-        })();
-    </script>
 
     <!-- TEXTURE -->
     <div class="noise"></div>
 
     <!-- MOBILE MENU OVERLAY -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="https://www.clarityacademics.com/mission-vision-values">Mission</a>
-        <a href="https://www.clarityacademics.com/our-services">Services</a>
-        <a href="https://www.clarityacademics.com/about">About</a>
+        <a href="#mission" onclick="toggleMenu()">Mission</a>
+        <a href="#services" onclick="toggleMenu()">Services</a>
+        <a href="#about" onclick="toggleMenu()">About</a>
         <div class="btn-wrapper" style="margin-top: 1rem;">
-            <a href="https://www.clarityacademics.com/insightsession" class="btn btn-primary" style="color: var(--oat-cream);">Book Session</a>
+            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary" style="color: var(--oat-cream);">Book Session</a>
         </div>
     </div>
 
     <!-- NAV (fixed to top) -->
     <nav id="navbar">
-        <a href="#" class="brand-lockup">
+        <a href="#hero" class="brand-lockup">
             <img src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg" alt="Clarity Academics Logo" class="logo-svg">
             <div class="brand-text">
                 <h4>Clarity Academics</h4>
                 <span>Clarity. Confidence. Calling.</span>
             </div>
         </a>
-       
+        
         <!-- Desktop Links -->
         <div class="nav-links">
-            <a href="https://www.clarityacademics.com/mission-vision-values">Mission</a>
-            <a href="https://www.clarityacademics.com/our-services">Services</a>
-            <a href="https://www.clarityacademics.com/about">About</a>
+            <a href="#mission">Mission</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
             <div class="btn-wrapper">
-                <a href="https://www.clarityacademics.com/insightsession" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.8rem; color: var(--oat-cream);">Book Insight Session</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.8rem; color: var(--oat-cream);">Book Insight Session</a>
             </div>
         </div>
 
@@ -664,7 +652,7 @@
             <div class="orb orb-2" aria-hidden="true"></div>
             <canvas id="particles" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
         </div>
-       
+        
         <div class="container hero-content">
             <h1>Master the Subject.<br><span>Free the Student.</span></h1>
             <p class="hero-subtitle">
@@ -708,7 +696,7 @@
                     </div>
                 </div>
             </div>
-           
+            
             <div class="visual-bridge reveal" style="transition-delay: 0.3s;">
                 <div style="width:100%; height:100%; background: var(--rich-sand); display:flex; align-items:center; justify-content:center; color:white; opacity:0.8;">
                     (Upload 'Visual Bridge' Image Here)
@@ -726,7 +714,7 @@
         <div class="container">
             <span class="section-tag" style="color:rgba(255,255,255,0.7);">Our Core Values</span>
             <h2>More Than Just Tutoring</h2>
-           
+            
             <div class="hex-grid">
                 <div class="tilt-card">
                     <div class="tilt-content">
@@ -844,12 +832,11 @@
             </div>
 
             <div class="btn-wrapper">
-                <a href="https://www.clarityacademics.com/insightsession"
+                <a href="#contact"
                    class="btn btn-primary"
                    style="background-color: var(--oat-cream); color: var(--rust-clay);">
                     Book Complimentary Insight Session
                 </a>
-                <!-- target="_blank" makes the thing open a new tab -->
             </div>
         </div>
     </section>
