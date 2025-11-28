@@ -15,7 +15,7 @@
 
     <style>
         :root {
-            /* Colors from brand bible */
+            /* Colors */
             --dusty-indigo: #3A5167;
             --dark-indigo: #2E4252;
             --moss-green: #8A9A5B;
@@ -27,13 +27,13 @@
             --dark-clay: #8F533F;
             --white: #ffffff;
 
-            /* Typography */
+            /* Fonts */
             --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
             --font-sans: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
 
-            /* Layout */
-            --section-padding: 6rem 2rem;
-            --container-width: 1100px;
+            /* Spacing */
+            --section-padding: 8rem 2rem;
+            --container-width: 1200px;
         }
 
         * {
@@ -51,26 +51,32 @@
             color: var(--dusty-indigo);
             font-family: var(--font-sans);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.page-inactive * {
+            animation-play-state: paused !important;
+            transition: none !important;
         }
 
         h1, h2, h3, h4 {
             font-family: var(--font-serif);
             line-height: 1.2;
-            color: var(--dusty-indigo);
         }
 
         p {
             font-family: var(--font-sans);
-            color: var(--dark-indigo);
-            font-size: 1rem;
+            color: var(--dusty-indigo);
         }
 
-        /* Subtle grain texture */
+        /* TEXTURE */
         .noise {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 9000;
             opacity: 0.04;
@@ -85,7 +91,7 @@
             z-index: 2;
         }
 
-        /* Buttons */
+        /* BUTTONS – MATCH HOMEPAGE */
         .btn-wrapper {
             position: relative;
             display: inline-block;
@@ -96,16 +102,15 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.9rem 2.4rem;
-            border-radius: 999px;
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
-            transition: all 0.3s ease;
             overflow: hidden;
             z-index: 1;
         }
@@ -113,22 +118,25 @@
         .btn-primary {
             background-color: var(--rust-clay);
             color: var(--white);
-            box-shadow: 0 8px 24px rgba(178, 106, 79, 0.35);
+            box-shadow: 0 10px 30px rgba(178, 106, 79, 0.3);
         }
 
         .btn-primary::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
 
         .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(178, 106, 79, 0.5);
             background-color: var(--dark-clay);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 34px rgba(178, 106, 79, 0.5);
         }
 
         .btn-primary:hover::before {
@@ -146,12 +154,12 @@
             color: var(--white);
         }
 
-        .btn:focus-visible {
-            outline: 3px solid rgba(178,106,79,0.35);
+        .btn:focus {
+            outline: 3px solid rgba(178,106,79,0.2);
             outline-offset: 3px;
         }
 
-        /* NAVIGATION (copied from homepage) */
+        /* NAV – MATCH HOMEPAGE */
         nav {
             position: fixed;
             top: 0;
@@ -169,9 +177,9 @@
         }
 
         nav.scrolled {
-            padding: 0.7rem 2rem;
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
 
         .brand-lockup {
@@ -222,55 +230,59 @@
             font-weight: 500;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
             position: relative;
-            padding-bottom: 0.2rem;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
+            bottom: -5px;
             left: 0;
-            bottom: -4px;
-            height: 2px;
             width: 0%;
+            height: 2px;
             background: var(--rust-clay);
-            transition: width 0.3s ease;
+            transition: 0.3s;
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
+        /* MOBILE NAV */
         .hamburger {
             display: none;
+            cursor: pointer;
+            z-index: 1002;
             flex-direction: column;
             gap: 6px;
             background: transparent;
             border: none;
-            cursor: pointer;
-            z-index: 1002;
         }
 
         .bar {
-            width: 26px;
+            width: 30px;
             height: 3px;
             background-color: var(--dusty-indigo);
-            border-radius: 999px;
             transition: 0.3s;
+            border-radius: 3px;
         }
 
         .mobile-menu {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
             background: var(--oat-cream);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
             transform: translateY(-100%);
-            transition: transform 0.5s ease-in-out;
+            transition: 0.5s ease-in-out;
             z-index: 999;
         }
 
@@ -280,108 +292,24 @@
 
         .mobile-menu a {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
-            text-decoration: none;
+            font-size: 2rem;
             color: var(--dusty-indigo);
+            text-decoration: none;
         }
 
-        /* HERO / PAGE HEADER */
-        .page-hero {
-            position: relative;
-            padding: 7rem 2rem 4rem;
-            background: radial-gradient(circle at top left, rgba(221,190,155,0.7), transparent 55%),
-                        radial-gradient(circle at bottom right, rgba(138,154,91,0.35), transparent 60%),
-                        var(--oat-cream);
-        }
-
-        .page-hero-inner {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-            gap: 3.5rem;
-            align-items: center;
-        }
-
-        .page-kicker {
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.78rem;
-            color: var(--moss-green);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .page-title {
-            font-size: clamp(2.4rem, 4vw, 3.2rem);
-            margin-bottom: 1rem;
-        }
-
-        .page-title span {
-            display: block;
-            font-style: italic;
-            color: var(--rust-clay);
-            font-weight: 400;
-        }
-
-        .page-hero-text p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            max-width: 40rem;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .hero-meta-card {
-            background: rgba(255,255,255,0.9);
-            padding: 1.25rem 1.5rem;
-            border-radius: 18px;
-            border: 1px solid rgba(58,81,103,0.08);
-            box-shadow: 0 16px 40px rgba(58,81,103,0.05);
-        }
-
-        .hero-meta-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .hero-meta-card p {
-            font-size: 0.95rem;
-        }
-
-        .meta-label {
-            font-size: 0.7rem;
+        /* SECTION UTILITIES */
+        .section-tag {
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--moss-green);
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .hero-meta-card small {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
             display: block;
-            margin-top: 0.4rem;
-            font-size: 0.8rem;
-            color: var(--dark-green);
         }
 
-        /* GENERIC SECTION */
         section.section {
             padding: var(--section-padding);
-        }
-
-        .section-tag {
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.75rem;
-            color: var(--moss-green);
-            font-weight: 600;
-            margin-bottom: 0.8rem;
         }
 
         .section-intro {
@@ -391,7 +319,85 @@
             margin-top: 0.8rem;
         }
 
-        /* MISSION SECTION */
+        /* HERO */
+        .page-hero {
+            padding: 7rem 2rem 4rem;
+        }
+
+        .page-hero-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .page-kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-size: 0.76rem;
+            color: var(--moss-green);
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+        }
+
+        .page-title {
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-title span {
+            display: block;
+            color: var(--rust-clay);
+        }
+
+        .page-hero-text p {
+            max-width: 34rem;
+            font-size: 1.02rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero-meta-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 20px;
+            padding: 1.6rem 1.5rem;
+            border: 1px solid rgba(58,81,103,0.12);
+            box-shadow: 0 16px 45px rgba(0,0,0,0.08);
+        }
+
+        .hero-meta-card .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .hero-meta-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-meta-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .hero-meta-card small {
+            display: block;
+            margin-top: 0.45rem;
+            font-size: 0.8rem;
+            color: var(--dark-green);
+        }
+
+        /* MISSION */
         .mission-section {
             background: #fff;
         }
@@ -400,7 +406,9 @@
             display: grid;
             grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
             gap: 3rem;
-            align-items: start;
+            align-items: flex-start;
+            max-width: var(--container-width);
+            margin: 0 auto;
         }
 
         .mission-body p + p {
@@ -415,18 +423,18 @@
         .mission-card {
             background: var(--light-sand);
             border-radius: 20px;
-            padding: 1.75rem 1.75rem 1.6rem;
-            border: 1px solid rgba(58,81,103,0.1);
+            padding: 1.8rem 1.75rem 1.7rem;
+            border: 1px solid rgba(58,81,103,0.12);
             box-shadow: 0 14px 40px rgba(58,81,103,0.08);
         }
 
         .mission-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.35rem;
+            margin-bottom: 0.7rem;
         }
 
         .mission-card p {
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             line-height: 1.8;
         }
 
@@ -441,18 +449,18 @@
             align-items: flex-start;
             gap: 0.6rem;
             font-size: 0.95rem;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.7rem;
             color: var(--dark-indigo);
         }
 
         .bullet-points i {
             color: var(--rust-clay);
             font-size: 1.1rem;
-            margin-top: 0.08rem;
+            margin-top: 0.15rem;
         }
 
         .mission-image {
-            margin-top: 1.5rem;
+            margin-top: 1.4rem;
             border-radius: 18px;
             overflow: hidden;
             border: 1px solid rgba(58,81,103,0.15);
@@ -465,7 +473,7 @@
             object-fit: cover;
         }
 
-        /* VISION SECTION */
+        /* VISION */
         .vision-section {
             background: var(--rich-sand);
         }
@@ -479,6 +487,8 @@
             grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
             gap: 2.5rem;
             align-items: center;
+            max-width: var(--container-width);
+            margin: 0 auto;
         }
 
         .vision-title {
@@ -513,7 +523,7 @@
             object-fit: cover;
         }
 
-        /* VALUES SECTION */
+        /* VALUES */
         .values-section {
             background: var(--oat-cream);
         }
@@ -529,6 +539,8 @@
         }
 
         .values-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem;
@@ -555,7 +567,7 @@
             align-items: center;
             justify-content: center;
             color: var(--rust-clay);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .value-icon i {
@@ -563,18 +575,22 @@
         }
 
         .value-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
         }
 
         .value-card p {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             line-height: 1.7;
         }
 
-        /* SMALL CROSS-LINK SECTIONS (Services & About) */
+        /* SLIM SECTIONS */
         .slim-section {
             padding: 3.5rem 2rem;
             background: #fff;
+        }
+
+        .slim-section:nth-of-type(even) {
+            background: var(--oat-cream);
         }
 
         .slim-inner {
@@ -592,9 +608,9 @@
             font-size: 0.98rem;
         }
 
-        /* CTA / CONTACT */
+        /* CTA */
         .cta-section {
-            padding: 5rem 2rem 4.5rem;
+            padding: 5rem 2rem;
             background: var(--dark-indigo);
             color: var(--oat-cream);
             text-align: center;
@@ -623,7 +639,7 @@
             background-color: #fff;
         }
 
-        /* FOOTER (copied from homepage) */
+        /* FOOTER */
         footer {
             background-color: var(--dusty-indigo);
             color: var(--oat-cream);
@@ -643,7 +659,12 @@
         .footer-col h4 {
             color: var(--rich-sand);
             margin-bottom: 1.2rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.78);
         }
 
         .footer-col a {
@@ -754,11 +775,13 @@
         <a href="#services" onclick="toggleMenu()">Services</a>
         <a href="#about" onclick="toggleMenu()">About</a>
         <div class="btn-wrapper" style="margin-top: 1rem;">
-            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary">Book Session</a>
+            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary" style="color: var(--oat-cream);">
+                Book Session
+            </a>
         </div>
     </div>
 
-    <!-- NAV (exact structure as homepage) -->
+    <!-- NAV (same structure & styles as homepage) -->
     <nav id="navbar">
         <a href="#hero" class="brand-lockup">
             <img src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg"
@@ -777,7 +800,7 @@
             <div class="btn-wrapper">
                 <a href="#contact"
                    class="btn btn-primary"
-                   style="padding: 0.7rem 1.6rem; font-size: 0.78rem; color: var(--oat-cream);">
+                   style="padding: 0.8rem 1.8rem; font-size: 0.8rem; color: var(--oat-cream);">
                     Book Insight Session
                 </a>
             </div>
@@ -795,7 +818,7 @@
         </button>
     </nav>
 
-    <!-- PAGE HERO -->
+    <!-- HERO -->
     <header id="hero" class="page-hero">
         <div class="page-hero-inner container">
             <div class="page-hero-text">
@@ -834,7 +857,7 @@
 
     <!-- MISSION -->
     <section id="mission" class="section mission-section">
-        <div class="container mission-grid">
+        <div class="mission-grid">
             <div class="mission-body">
                 <span class="section-tag">Our Mission</span>
                 <h2>Why Clarity Academics Exists</h2>
@@ -849,4 +872,352 @@
                     and empowering learners with clarity, confidence, and purpose.</strong>
                 </p>
                 <p>
-                    That means
+                    That means we refuse one-size-fits-all tutoring. Every plan is built around
+                    the nervous system, the home environment, and the student’s God-given wiring—
+                    not just the next test date.
+                </p>
+                <ul class="bullet-points">
+                    <li>
+                        <i class="ph ph-heartbeat" aria-hidden="true"></i>
+                        <span>We protect mental health and nervous-system safety while we push for mastery and rigor.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-seal-check" aria-hidden="true"></i>
+                        <span>We use clear, evidence-backed strategies so students know why a tool works—not just that it does.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-hands-praying" aria-hidden="true"></i>
+                        <span>We honor each family’s convictions and keep faith–science alignment on the table, not off-limits.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <aside class="mission-card">
+                <h3>What This Looks Like Week-to-Week</h3>
+                <p>
+                    In practice, our mission shows up as calm, structured sessions that weave
+                    together content review, executive function coaching, and character formation.
+                </p>
+                <ul class="bullet-points">
+                    <li>
+                        <i class="ph ph-brain" aria-hidden="true"></i>
+                        <span>Hands-on problem solving instead of passive worksheets.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-calendar-check" aria-hidden="true"></i>
+                        <span>Simple, sustainable systems for planning, tracking, and follow-through.</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-users-three" aria-hidden="true"></i>
+                        <span>Regular parent touchpoints so you’re never guessing what’s happening.</span>
+                    </li>
+                </ul>
+                <div class="mission-image" aria-hidden="true">
+                    <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                         alt="Calm, focused student working at a desk">
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="section vision-section">
+        <div class="vision-inner">
+            <div class="vision-text">
+                <span class="section-tag">Our Vision</span>
+                <div class="vision-tagline">Clarity. Confidence. Calling.</div>
+                <h2 class="vision-title">The Future We’re Building Toward</h2>
+                <p>
+                    We envision families who no longer have to choose between ambitious academics
+                    and deep peace at home. School stress stops owning the dinner table. Children
+                    know how to work hard <em>without</em> tying their worth to their GPA.
+                </p>
+                <p>
+                    In that future, students can speak fluently about both physics and faith—
+                    without feeling like they’re betraying one to honor the other. They grow up
+                    able to discern truth, carry responsibility, and listen for God’s voice in the
+                    middle of real life.
+                </p>
+                <p>
+                    Clarity Academics is one small, intentional step toward that world—one student,
+                    one family, one lab at a time.
+                </p>
+            </div>
+
+            <div class="vision-image" aria-hidden="true">
+                <img src="https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Family discussing school with calm and connection">
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="section values-section">
+        <div class="values-header">
+            <span class="section-tag">Core Values</span>
+            <h2>How We Make Decisions, Not Just Marketing Claims</h2>
+            <p>
+                These are the non-negotiables that shape curriculum choices, scheduling,
+                feedback, and the way we talk to your student when a quiz goes badly.
+            </p>
+        </div>
+
+        <div class="values-grid">
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-lighthouse" aria-hidden="true"></i>
+                </div>
+                <h3>Truth Over Trend</h3>
+                <p>
+                    We don’t chase the latest TikTok study hack. We lean on time-tested learning
+                    science and a Christian worldview that honors truth, not noise.
+                </p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-tree" aria-hidden="true"></i>
+                </div>
+                <h3>Discipline as Discipleship</h3>
+                <p>
+                    Discipline isn’t punishment; it’s training. We help students build consistency,
+                    integrity, and ownership—not perfectionism.
+                </p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-sun" aria-hidden="true"></i>
+                </div>
+                <h3>Clarity Is Kindness</h3>
+                <p>
+                    Confusion breeds anxiety. We slow things down, name what’s going on,
+                    and give students clear, doable next steps.
+                </p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-heart" aria-hidden="true"></i>
+                </div>
+                <h3>Whole-Student Care</h3>
+                <p>
+                    Sleep, sensory load, hormones, and mental health matter. We adjust pace and
+                    expectations to protect the student, not just the syllabus.
+                </p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-ear-slash" aria-hidden="true"></i>
+                </div>
+                <h3>Low-Stimulus, High-Structure</h3>
+                <p>
+                    Calm environments and predictable routines give anxious or neurodivergent
+                    brains room to learn deeply without constant fight-or-flight.
+                </p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-icon">
+                    <i class="ph ph-hands-clapping" aria-hidden="true"></i>
+                </div>
+                <h3>Close Parent Partnership</h3>
+                <p>
+                    You’re never an afterthought. We bring you into the process with honest updates,
+                    clear expectations, and a shared plan.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- SERVICES CROSS-LINK -->
+    <section id="services" class="slim-section">
+        <div class="slim-inner">
+            <div>
+                <span class="section-tag">Programs Shaped by This Mission</span>
+                <h2 style="margin-bottom: 0.75rem;">How This Shows Up in Our Services</h2>
+                <p>
+                    Every offering is built from the same DNA: whole-student care, clear systems,
+                    and faith–science alignment. You can choose the level of intensity that fits
+                    your family’s season.
+                </p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <div class="btn-wrapper">
+                    <a href="/clarity-elite-apply" class="btn btn-secondary">Clarity Elite (Flagship Coaching)</a>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="/book-core-session" class="btn btn-secondary">Clarity Core (1:1 Tutoring)</a>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="/group-signup" class="btn btn-secondary">Clarity Cohort (Small Groups)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT CROSS-LINK -->
+    <section id="about" class="slim-section" style="background: var(--oat-cream);">
+        <div class="slim-inner">
+            <div>
+                <span class="section-tag">The Human Behind the Labs</span>
+                <h2 style="margin-bottom: 0.75rem;">Who Leads Clarity Academics</h2>
+                <p>
+                    Clarity was founded by Saugat, a science educator and researcher who loves both
+                    rigorous data and the local church. He’s walked with students who are burnt out,
+                    bored, or quietly questioning if faith and science can coexist.
+                </p>
+            </div>
+            <div class="btn-wrapper">
+                <a href="/about-saugat" class="btn btn-secondary">Read the Founder Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section id="contact" class="cta-section">
+        <div class="container" style="text-align: center;">
+            <h2>Ready to See This Mission in Action?</h2>
+            <p>
+                If this sounds like the kind of support your family has been looking for,
+                the next step is simple: book a complimentary Insight Session. We’ll listen,
+                map out goals, and help you decide whether Clarity is a fit.
+            </p>
+            <div class="btn-wrapper">
+                <a href="/clarity-elite-apply" class="btn btn-primary">
+                    Book Complimentary Insight Session
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clarity Academics</h4>
+                    <p>Lexington, KY<br>Online Worldwide</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <a href="/clarity-elite-apply">Clarity Elite</a>
+                    <a href="/book-core-session">Clarity Core</a>
+                    <a href="/group-signup">Clarity Cohort</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:hello@clarityacademics.com">hello@clarityacademics.com</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © <span id="year"></span> Clarity Academics. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let _previousBodyOverflow = '';
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            if (!menu || !hamburger) return;
+
+            menu.classList.toggle('active');
+            const isActive = menu.classList.contains('active');
+
+            hamburger.setAttribute('aria-expanded', String(isActive));
+            menu.setAttribute('aria-hidden', String(!isActive));
+
+            if (isActive) {
+                _previousBodyOverflow = document.body.style.overflow || '';
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('menu-open');
+                const firstLink = menu.querySelector('a');
+                if (firstLink) firstLink.focus();
+            } else {
+                document.body.style.overflow = _previousBodyOverflow;
+                document.body.classList.remove('menu-open');
+                hamburger.focus();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobileMenu');
+                if (menu && menu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        function debounce(fn, wait = 150) {
+            let t = null;
+            return (...args) => {
+                clearTimeout(t);
+                t = setTimeout(() => fn(...args), wait);
+            };
+        }
+
+        // NAVBAR SCROLL EFFECT (same behavior as homepage)
+        const nav = document.getElementById('navbar');
+        let lastScrollY = 0;
+
+        const onScroll = () => {
+            if (!nav) return;
+            lastScrollY = window.scrollY;
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        let scrollT = null;
+        window.addEventListener('scroll', () => {
+            if (scrollT !== null) cancelAnimationFrame(scrollT);
+            scrollT = requestAnimationFrame(onScroll);
+        });
+        onScroll();
+
+        // keep body padded so content doesn't slide under fixed nav
+        (function syncBodyPaddingWithNav() {
+            const navbar = document.getElementById('navbar');
+            if (!navbar) return;
+
+            function updateBodyPadding() {
+                const height = Math.ceil(navbar.getBoundingClientRect().height);
+                if (document.body.style.paddingTop !== height + 'px') {
+                    document.body.style.paddingTop = height + 'px';
+                }
+            }
+
+            if ('ResizeObserver' in window) {
+                const ro = new ResizeObserver(() => updateBodyPadding());
+                ro.observe(navbar);
+                window.addEventListener('resize', debounce(updateBodyPadding, 80));
+                updateBodyPadding();
+            } else {
+                window.addEventListener('load', updateBodyPadding);
+                window.addEventListener('resize', debounce(updateBodyPadding, 120));
+                window.addEventListener('scroll', debounce(updateBodyPadding, 120));
+                updateBodyPadding();
+            }
+        })();
+
+        // footer year
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    </script>
+</body>
+</html>
