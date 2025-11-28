@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Clarity Elite | High-Touch Academic Coaching</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- BRAND FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- BRAND TOKENS (MATCH HOMEPAGE / MISSION / SERVICES) --- */
+        :root {
+            --dusty-indigo: #3A5167;
+            --dark-indigo: #2E4252;
+            --moss-green: #8A9A5B;
+            --dark-green: #72804A;
+            --rich-sand: #DDBE9B;
+            --light-sand: #EFE1CD;
+            --oat-cream: #EFE9E1;
+            --rust-clay: #B26A4F;
+            --dark-clay: #8F533F;
+            --white: #ffffff;
+
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+
+            --container-width: 1120px;
+            --section-padding: 5.5rem;
+        }
+
+        /* --- RESET & BASE --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--oat-cream);
+            color: var(--dusty-indigo);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Subtle paper / noise overlay (simplified to avoid giant base64) */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.05;
+            background-image:
+                radial-gradient(circle at 0 0, rgba(0,0,0,0.09) 0, transparent 55%),
+                radial-gradient(circle at 100% 0, rgba(0,0,0,0.05) 0, transparent 55%),
+                radial-gradient(circle at 0 100%, rgba(0,0,0,0.06) 0, transparent 55%);
+            mix-blend-mode: multiply;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            position: relative;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rust-clay);
+            margin-bottom: 0.9rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.1rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.4rem;
+            color: var(--dark-indigo);
+        }
+
+        .section-lead {
+            max-width: 640px;
+            font-size: 1.02rem;
+            color: var(--dark-indigo);
+            opacity: 0.95;
+        }
+
+        /* --- BUTTONS (MATCH HOMEPAGE / SERVICES) --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2.4rem;
+            border-radius: 999px;
+            border: none;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255,255,255,0.28), transparent 60%);
+            transform: translateX(-120%);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+
+        .btn-primary {
+            background: var(--rust-clay);
+            color: var(--white);
+            box-shadow: 0 16px 40px rgba(178, 106, 79, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1.5px solid var(--dusty-indigo);
+            color: var(--dusty-indigo);
+            box-shadow: 0 10px 24px rgba(58, 81, 103, 0.08);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dusty-indigo);
+            color: var(--white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--dusty-indigo);
+            padding-inline: 0;
+            box-shadow: none;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .btn-ghost:hover {
+            color: var(--rust-clay);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* --- NAVIGATION (MATCH EXISTING PAGES) --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            background: rgba(239, 233, 225, 0.9);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            transition:
+                padding 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.6rem 2rem;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            height: 72px;
+            width: auto;
+            display: block;
+            transition: height 0.25s ease, transform 0.25s ease;
+        }
+
+        nav.scrolled .logo-svg {
+            height: 58px;
+        }
+
+        .brand-text h4 {
+            font-size: 1.4rem;
+            line-height: 1;
+            color: var(--dusty-indigo);
+            margin: 0 0 0.1rem;
+            font-family: var(--font-serif);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 4px;
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 500;
+            color: var(--dusty-indigo);
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rust-clay), var(--rich-sand));
+            transition: width 0.22s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-indigo);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: auto;
+        }
+
+        .hamburger .bar {
+            width: 24px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--dusty-indigo);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        body.menu-open .hamburger .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        body.menu-open .hamburger .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.menu-open .hamburger .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(12, 18, 22, 0.92);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s ease, opacity 0.35s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-serif);
+            font-size: 2.1rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--oat-cream);
+            text-decoration: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--rich-sand);
+        }
+
+        /* --- ELITE HERO --- */
+        .elite-hero {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            min-height: 80vh;
+            background:
+                radial-gradient(circle at 5% 0%, rgba(221,190,155,0.24), transparent 55%),
+                radial-gradient(circle at 110% 10%, rgba(114,128,74,0.25), transparent 55%),
+                linear-gradient(135deg, #121821, #192538, #151c24);
+            color: var(--oat-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .elite-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,255,255,0.12), transparent 60%),
+                linear-gradient(120deg, rgba(221,190,155,0.18), transparent 55%);
+            mix-blend-mode: screen;
+            opacity: 0.85;
+            pointer-events: none;
+            animation: heroGlow 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% {
+                opacity: 0.75;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(-30px, 18px, 0) scale(1.04);
+            }
+        }
+
+        .elite-hero-inner {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 3.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .elite-hero-copy {
+            max-width: 620px;
+        }
+
+        .elite-kicker {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rich-sand);
+            margin-bottom: 1rem;
+        }
+
+        .elite-hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            line-height: 1.1;
+            letter-spacing: 0.04em;
+            margin: 0 0 1.4rem;
+        }
+
+        .elite-hero-title span {
+            color: var(--rich-sand);
+        }
+
+        .elite-hero-subtitle {
+            font-size: 1.05rem;
+            max-width: 560px;
+            color: rgba(240,236,230,0.96);
+            margin-bottom: 1.9rem;
+        }
+
+        .elite-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.1rem;
+        }
+
+        .elite-pill {
+            padding: 0.48rem 1.15rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.32);
+            background: radial-gradient(circle at 0 0, rgba(255,255,255,0.16), transparent 60%);
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: rgba(248,244,235,0.96);
+            backdrop-filter: blur(18px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .elite-pill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(221,190,155,0.45), transparent 60%);
+            opacity: 0;
+            transform: translateX(-40%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .elite-pill:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .elite-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .elite-hero .btn-primary {
+            background: linear-gradient(135deg, var(--rich-sand), #f4d7af);
+            color: var(--dark-indigo);
+            box-shadow: 0 22px 60px rgba(0,0,0,0.45);
+        }
+
+        .elite-hero .btn-primary:hover {
+            background: linear-gradient(135deg, #f4d7af, var(--rich-sand));
+        }
+
+        .elite-hero .btn-secondary {
+            border-color: rgba(244,239,230,0.95);
+            color: rgba(244,239,230,0.95);
+            background: transparent;
+            box-shadow: 0 14px 40px rgba(0,0,0,0.42);
+        }
+
+        .elite-hero .btn-secondary:hover {
+            background: rgba(248,244,235,0.08);
+            color: var(--rich-sand);
+        }
+
+        .elite-hero-footnote {
+            font-size: 0.82rem;
+            color: rgba(244,239,230,0.75);
+        }
+
+        .elite-hero-footnote strong {
+            color: var(--rich-sand);
+        }
+
+        /* Right side media card (IMAGE PLACEHOLDER) */
+        .elite-hero-media {
+            flex: 0 0 320px;
+            max-width: 360px;
+            align-self: stretch;
+            border-radius: 26px;
+            padding: 1.4rem;
+            background: radial-gradient(circle at 0 0, rgba(221,190,155,0.24), transparent 60%),
+                        linear-gradient(160deg, rgba(17,23,30,0.95), rgba(23,33,45,0.98));
+            border: 1px solid rgba(255,255,255,0.14);
+            box-shadow:
+                0 26px 70px rgba(0,0,0,0.7),
+                0 0 0 1px rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+            animation: floatCard 16s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(-0.4deg);
+            }
+            50% {
+                transform: translate3d(0, -10px, 0) rotate(0.3deg);
+            }
+            100% {
+                transform: translate3d(0, 0, 0) rotate(-0.4deg);
+            }
+        }
+
+        .elite-hero-media::before {
+            content: '';
+            position: absolute;
+            inset: -40%;
+            background: conic-gradient(
+                    from 180deg,
+                    rgba(221,190,155,0.4),
+                    transparent,
+                    rgba(139,190,155,0.35),
+                    transparent,
+                    rgba(221,190,155,0.5)
+            );
+            opacity: 0.35;
+            mix-blend-mode: soft-light;
+        }
+
+        .elite-media-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .elite-media-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(244,239,230,0.35);
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(244,239,230,0.92);
+            margin-bottom: 0.9rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .elite-media-tag i {
+            font-size: 1rem;
+        }
+
+        .elite-media-image {
+            height: 210px;
+            border-radius: 22px;
+            background: radial-gradient(circle at 50% 10%, rgba(221,190,155,0.55), transparent 55%),
+                        linear-gradient(135deg, #192635, #111821);
+            border: 1px solid rgba(255,255,255,0.18);
+            margin-bottom: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(244,239,230,0.65);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 1.2rem;
+        }
+
+        .elite-media-meta-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .elite-media-meta-body {
+            font-size: 0.9rem;
+            color: rgba(244,239,230,0.82);
+        }
+
+        /* --- ELITE SUBNAV (PAGE LOCAL NAV) --- */
+        .elite-subnav {
+            position: sticky;
+            top: 80px;
+            z-index: 50;
+            padding: 0.25rem 0 0.75rem;
+            background: linear-gradient(to bottom, rgba(239,233,225,0.98), rgba(239,233,225,0.94), transparent);
+        }
+
+        .elite-subnav-inner {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0.4rem 1.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(58,81,103,0.14);
+            background: rgba(255,255,255,0.96);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.6rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .elite-subnav-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .elite-subnav-link {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 600;
+            color: var(--dusty-indigo);
+            text-decoration: none;
+            opacity: 0.8;
+            position: relative;
+            padding-block: 0.55rem;
+            white-space: nowrap;
+        }
+
+        .elite-subnav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0.25rem;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rust-clay), var(--rich-sand));
+            transition: width 0.2s ease;
+        }
+
+        .elite-subnav-link:hover {
+            opacity: 1;
+        }
+
+        .elite-subnav-link:hover::after {
+            width: 100%;
+        }
+
+        /* --- WHY ELITE --- */
+        .elite-why {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.84), var(--oat-cream));
+        }
+
+        .elite-why-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+            gap: 3.2rem;
+            align-items: flex-start;
+        }
+
+        .elite-why-meta {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .elite-meta-card {
+            border-radius: 20px;
+            padding: 1.4rem 1.6rem;
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(58,81,103,0.1);
+            box-shadow: 0 14px 38px rgba(0,0,0,0.05);
+        }
+
+        .elite-meta-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .elite-meta-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            color: var(--dark-indigo);
+        }
+
+        .elite-meta-body {
+            font-size: 0.94rem;
+            color: var(--dusty-indigo);
+        }
+
+        .elite-meta-icon {
+            font-size: 1.4rem;
+            color: var(--rust-clay);
+            margin-bottom: 0.6rem;
+        }
+
+        /* --- ELITE PATHS (TWO CARDS) --- */
+        .elite-paths {
+            background: radial-gradient(circle at 50% 0%, rgba(221,190,155,0.23), transparent 65%);
+        }
+
+        .elite-paths-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 3rem;
+        }
+
+        .elite-paths-header .section-lead {
+            margin: 0 auto;
+        }
+
+        .elite-path-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .elite-path-card {
+            position: relative;
+            border-radius: 26px;
+            padding: 2.2rem 2.2rem 2rem;
+            background: radial-gradient(circle at 0 0, rgba(221,190,155,0.18), transparent 60%),
+                        linear-gradient(145deg, rgba(255,255,255,0.98), rgba(244,233,217,0.98));
+            border: 1px solid rgba(171,144,113,0.35);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.14);
+            overflow: hidden;
+        }
+
+        .elite-path-card::before {
+            content: '';
+            position: absolute;
+            inset: -40%;
+            background: conic-gradient(from 120deg,
+                    rgba(221,190,155,0.6),
+                    rgba(114,128,74,0.55),
+                    rgba(221,190,155,0.7),
+                    rgba(178,106,79,0.6),
+                    rgba(221,190,155,0.6));
+            opacity: 0;
+            mix-blend-mode: soft-light;
+            transition: opacity 0.4s ease;
+        }
+
+        .elite-path-card:hover::before {
+            opacity: 0.75;
+        }
+
+        .elite-path-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            color: var(--moss-green);
+            margin-bottom: 0.6rem;
+        }
+
+        .elite-path-title {
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+            color: var(--dark-indigo);
+        }
+
+        .elite-path-subtitle {
+            font-size: 0.98rem;
+            color: var(--dusty-indigo);
+            margin-bottom: 1.4rem;
+        }
+
+        .elite-path-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.6rem;
+        }
+
+        .elite-path-list li {
+            position: relative;
+            padding-left: 1.4rem;
+            font-size: 0.94rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .elite-path-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.4rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--rust-clay), var(--rich-sand));
+        }
+
+        .elite-path-pricing {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--dark-indigo);
+            margin-bottom: 1.1rem;
+            font-weight: 600;
+        }
+
+        .elite-path-pricing span {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+        }
+
+        /* --- SHARED BENEFITS GRID --- */
+        .elite-includes {
+            background: linear-gradient(to bottom, var(--oat-cream), #f6efe5);
+        }
+
+        .elite-includes-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 3rem;
+        }
+
+        .elite-feature-grid {
+            display: grid;
+            gap: 1.9rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .elite-feature {
+            border-radius: 20px;
+            padding: 1.7rem 1.8rem;
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(58,81,103,0.12);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.06);
+        }
+
+        .elite-feature h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            color: var(--dark-indigo);
+        }
+
+        .elite-feature p {
+            font-size: 0.95rem;
+        }
+
+        .elite-feature small {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        /* --- COMPARISON BAND --- */
+        .elite-compare {
+            background: linear-gradient(135deg, #111821, #1c2834);
+            color: rgba(244,239,230,0.96);
+        }
+
+        .elite-compare-inner {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2.5rem;
+        }
+
+        .compare-col-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.6rem;
+            color: rgba(244,239,230,0.7);
+        }
+
+        .compare-col-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .compare-table {
+            border-radius: 18px;
+            border: 1px solid rgba(244,239,230,0.22);
+            padding: 1.3rem 1.5rem;
+            background: radial-gradient(circle at 0 0, rgba(221,190,155,0.22), transparent 55%),
+                        rgba(10,15,20,0.8);
+            font-size: 0.92rem;
+        }
+
+        .compare-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.6rem;
+            padding-block: 0.45rem;
+            border-bottom: 1px solid rgba(244,239,230,0.08);
+        }
+
+        .compare-row:last-child {
+            border-bottom: none;
+        }
+
+        .compare-label {
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.78rem;
+            color: rgba(244,239,230,0.78);
+        }
+
+        .compare-value {
+            text-align: right;
+        }
+
+        .compare-footnote {
+            font-size: 0.82rem;
+            color: rgba(244,239,230,0.7);
+            margin-top: 0.9rem;
+        }
+
+        /* --- FIT / NOT FIT --- */
+        .elite-fit {
+            background: var(--oat-cream);
+        }
+
+        .elite-fit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .fit-card {
+            border-radius: 22px;
+            padding: 1.8rem 1.9rem;
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(58,81,103,0.12);
+            box-shadow: 0 16px 46px rgba(0,0,0,0.06);
+        }
+
+        .fit-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .fit-label.good {
+            color: var(--dark-green);
+        }
+
+        .fit-label.not {
+            color: var(--rust-clay);
+        }
+
+        .fit-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-indigo);
+        }
+
+        .fit-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .fit-list li {
+            padding-left: 1.4rem;
+            position: relative;
+            margin-bottom: 0.55rem;
+        }
+
+        .fit-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0.1rem;
+            top: 0;
+            color: var(--moss-green);
+        }
+
+        .fit-list.not li::before {
+            color: var(--rust-clay);
+        }
+
+        /* --- MONTH / PROCESS TIMELINE --- */
+        .elite-flow {
+            background: linear-gradient(to bottom, #f6efe5, var(--light-sand));
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .flow-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 1.5px solid rgba(58,81,103,0.24);
+        }
+
+        .flow-step {
+            position: relative;
+            padding-left: 1.8rem;
+            padding-bottom: 1.9rem;
+        }
+
+        .flow-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .flow-step::before {
+            content: '';
+            position: absolute;
+            left: -0.45rem;
+            top: 0.25rem;
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--rich-sand), var(--rust-clay));
+            box-shadow: 0 0 0 4px rgba(221,190,155,0.3);
+        }
+
+        .flow-step-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--moss-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .flow-step-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark-indigo);
+        }
+
+        .flow-step-body {
+            font-size: 0.94rem;
+        }
+
+        .flow-aside {
+            border-radius: 20px;
+            padding: 1.7rem 1.8rem;
+            background: rgba(255,255,255,0.98);
+            border: 1px solid rgba(58,81,103,0.1);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.06);
+            font-size: 0.94rem;
+        }
+
+        .flow-aside h3 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            margin-bottom: 0.7rem;
+        }
+
+        /* --- BRAND STRIP / ABOUT (FOR #about LINK) --- */
+        .elite-brand {
+            background: linear-gradient(to right, var(--dusty-indigo), #243345, #1b2735);
+            color: rgba(244,239,230,0.96);
+        }
+
+        .elite-brand-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .elite-brand h2 {
+            font-family: var(--font-serif);
+            font-size: 2.15rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .elite-brand p {
+            font-size: 0.96rem;
+        }
+
+        .elite-values-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        .elite-values-list li {
+            padding-left: 1.4rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .elite-values-list li::before {
+            content: '✶';
+            position: absolute;
+            left: 0;
+            top: 0.05rem;
+            color: var(--rich-sand);
+        }
+
+        /* --- FAQ --- */
+        .elite-faq {
+            background: var(--oat-cream);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        details.faq-item {
+            border-radius: 18px;
+            border: 1px solid rgba(58,81,103,0.18);
+            background: rgba(255,255,255,0.98);
+            padding: 1.1rem 1.4rem;
+            margin-bottom: 0.9rem;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.04);
+        }
+
+        details.faq-item[open] {
+            box-shadow: 0 18px 48px rgba(0,0,0,0.07);
+        }
+
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .faq-item summary em {
+            font-style: normal;
+            font-size: 1.2rem;
+            opacity: 0.55;
+        }
+
+        .faq-item p {
+            margin-top: 0.7rem;
+            font-size: 0.94rem;
+        }
+
+        /* --- FINAL CTA / CONTACT (#contact) --- */
+        .elite-final-cta {
+            background: radial-gradient(circle at 50% 0%, rgba(221,190,155,0.35), transparent 65%),
+                        linear-gradient(135deg, #111821, #1b2735, #121821);
+            color: rgba(244,239,230,0.96);
+            text-align: center;
+        }
+
+        .elite-final-cta h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .elite-final-cta p {
+            max-width: 640px;
+            margin: 0 auto 2.4rem;
+            font-size: 0.98rem;
+        }
+
+        .elite-final-meta {
+            max-width: 620px;
+            margin: 2rem auto 0;
+            font-size: 0.86rem;
+            color: rgba(244,239,230,0.75);
+        }
+
+        .elite-final-meta strong {
+            color: var(--rich-sand);
+        }
+
+        /* --- FOOTER (MATCH HOMEPAGE / SERVICES) --- */
+        footer {
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+            padding: 4.5rem 2rem 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: var(--rich-sand);
+            font-weight: 700;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .footer-col a {
+            display: block;
+            text-decoration: none;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 0.7rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--rich-sand);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.45);
+            font-size: 0.82rem;
+        }
+
+        /* --- REVEAL ANIMATION (MATCH SERVICES) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1080px) {
+            .elite-hero-inner {
+                flex-direction: column;
+            }
+
+            .elite-hero-media {
+                align-self: stretch;
+                max-width: 100%;
+                order: -1;
+            }
+
+            .elite-hero-copy {
+                max-width: 100%;
+            }
+
+            .elite-why-grid,
+            .elite-compare-inner,
+            .elite-fit-grid,
+            .flow-grid,
+            .elite-brand-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .elite-brand-inner {
+                row-gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .elite-subnav-inner {
+                border-radius: 18px;
+                justify-content: flex-start;
+            }
+
+            .section {
+                padding: 4.2rem 0;
+            }
+
+            .elite-final-cta h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav, nav.scrolled {
+                padding-inline: 1.2rem;
+            }
+
+            .elite-hero {
+                padding-top: 7rem;
+            }
+
+            .elite-hero-title {
+                font-size: 2.4rem;
+            }
+
+            .elite-hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .elite-path-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .elite-subnav-inner {
+                padding-inline: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <!-- MOBILE MENU OVERLAY (MATCH NAV STRUCTURE) -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="/mission.html" onclick="toggleMenu()">Mission</a>
+        <a href="/services.html" onclick="toggleMenu()">Services</a>
+        <a href="/about.html" onclick="toggleMenu()">About</a>
+        <div class="btn-wrapper" style="margin-top: 1rem;">
+            <a href="#contact"
+               onclick="toggleMenu()"
+               class="btn btn-primary"
+               style="color: var(--oat-cream);">
+                Book Session
+            </a>
+        </div>
+    </div>
+
+    <!-- NAV (fixed to top, same structure as other pages) -->
+    <nav id="navbar">
+        <a href="/index.html" class="brand-lockup">
+            <img
+                src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg"
+                alt="Clarity Academics Logo"
+                class="logo-svg">
+            <div class="brand-text">
+                <h4>Clarity Academics</h4>
+                <span>Clarity. Confidence. Calling.</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="/mission.html">Mission</a>
+            <a href="/services.html">Services</a>
+            <a href="/about.html">About</a>
+            <div class="btn-wrapper">
+                <a href="#contact"
+                   class="btn btn-primary"
+                   style="font-size: 0.8rem; color: var(--oat-cream);">
+                    Book Insight Session
+                </a>
+            </div>
+        </div>
+
+        <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Toggle menu"
+            aria-controls="mobileMenu"
+            aria-expanded="false"
+            onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <main>
+        <!-- HERO -->
+        <section class="elite-hero" id="hero">
+            <div class="container elite-hero-inner">
+                <div class="elite-hero-copy reveal">
+                    <div class="elite-kicker">Clarity Elite • High-Touch Academic Coaching</div>
+                    <h1 class="elite-hero-title">
+                        For the student who’s ready to
+                        <span>lead, not just catch up.</span>
+                    </h1>
+                    <p class="elite-hero-subtitle">
+                        Clarity Elite is our most comprehensive offer: deep AP-level math and science support,
+                        executive-function coaching, and a faith-safe space for students who carry a lot—and are
+                        capable of even more.
+                    </p>
+
+                    <div class="elite-pills">
+                        <span class="elite-pill">AP-level mastery</span>
+                        <span class="elite-pill">Executive-function coaching</span>
+                        <span class="elite-pill">Faith-safe, science-serious</span>
+                        <span class="elite-pill">Parent partnership</span>
+                    </div>
+
+                    <div class="elite-hero-actions">
+                        <a href="#contact" class="btn btn-primary">
+                            Apply for Clarity Elite
+                        </a>
+                        <a href="#compare" class="btn btn-secondary">
+                            Compare to other services
+                        </a>
+                    </div>
+
+                    <p class="elite-hero-footnote">
+                        <strong>Spots are limited.</strong> We intentionally keep Clarity Elite small so students
+                        stay known, not just “on the calendar.”
+                    </p>
+                </div>
+
+                <!-- IMAGE PLACEHOLDER CARD -->
+                <aside class="elite-hero-media reveal" aria-label="Clarity Elite preview">
+                    <div class="elite-media-inner">
+                        <div class="elite-media-tag">
+                            <i class="ph ph-star-four"></i>
+                            Elite Student Support
+                        </div>
+                        <div class="elite-media-image">
+                            Replace this with a branded photo or mockup of your Elite sessions,
+                            dashboard, or student workspace.
+                        </div>
+                        <div class="elite-media-meta-title">Built for high-capacity students.</div>
+                        <p class="elite-media-meta-body">
+                            AP classes, sports, leadership, church, family, life—Clarity Elite keeps all of it in
+                            view. One plan, one coach, one calm place to work it out.
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- PAGE SUBNAV -->
+        <div class="elite-subnav">
+            <div class="elite-subnav-inner">
+                <a href="#overview" class="elite-subnav-link">Overview</a>
+                <a href="#paths" class="elite-subnav-link">Two Elite paths</a>
+                <a href="#included" class="elite-subnav-link">What’s included</a>
+                <a href="#compare" class="elite-subnav-link">Elite vs Core/Cohort</a>
+                <a href="#fit" class="elite-subnav-link">Who it’s for</a>
+                <a href="#flow" class="elite-subnav-link">A month inside</a>
+                <a href="#faq" class="elite-subnav-link">FAQ</a>
+                <a href="#contact" class="elite-subnav-link">Apply</a>
+            </div>
+        </div>
+
+        <!-- WHY ELITE -->
+        <section class="section elite-why" id="overview">
+            <div class="container elite-why-grid">
+                <div class="reveal">
+                    <span class="section-kicker">Why Clarity Elite exists</span>
+                    <h2 class="section-title">
+                        More than homework help.<br>Formation for high-capacity students.
+                    </h2>
+                    <p class="section-lead">
+                        Some students don’t need more worksheets. They need a calm, expert guide who can hold
+                        the whole picture: grades, workload, habits, beliefs, and nervous systems.
+                    </p>
+                    <p style="margin-top: 1.4rem;">
+                        Clarity Elite is built for students who are already carrying a lot—AP or honors classes,
+                        sports, music, youth group, leadership—and who feel the gap between what they’re capable
+                        of and what keeps ending up on the report card.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        We combine evidence-backed learning strategies with gentle but honest coaching. No shame,
+                        no panic, no performative pressure. Just clear plans, steady accountability, and a space
+                        where questions and convictions are both welcome.
+                    </p>
+                </div>
+
+                <div class="elite-why-meta reveal">
+                    <article class="elite-meta-card">
+                        <div class="elite-meta-icon">
+                            <i class="ph ph-brain"></i>
+                        </div>
+                        <div class="elite-meta-label">Pillar 01</div>
+                        <div class="elite-meta-title">Depth over shortcuts.</div>
+                        <p class="elite-meta-body">
+                            We focus on conceptual mastery, not just “what’s on the test.” When students understand
+                            the why, the grades follow—and so does their confidence.
+                        </p>
+                    </article>
+
+                    <article class="elite-meta-card">
+                        <div class="elite-meta-icon">
+                            <i class="ph ph-list-checks"></i>
+                        </div>
+                        <div class="elite-meta-label">Pillar 02</div>
+                        <div class="elite-meta-title">Real executive-function help.</div>
+                        <p class="elite-meta-body">
+                            Planning, prioritizing, breaking down projects, and building systems that actually fit
+                            your student’s brain—not someone else’s productivity aesthetic.
+                        </p>
+                    </article>
+
+                    <article class="elite-meta-card">
+                        <div class="elite-meta-icon">
+                            <i class="ph ph-hands-clapping"></i>
+                        </div>
+                        <div class="elite-meta-label">Pillar 03</div>
+                        <div class="elite-meta-title">Faith-safe, science-serious.</div>
+                        <p class="elite-meta-body">
+                            A space where rigorous science, honest questions, and personal belief can sit at the
+                            same table—without pressure, performance, or eye-rolling.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- TWO ELITE PATHS -->
+        <section class="section elite-paths" id="paths">
+            <div class="container">
+                <div class="elite-paths-header reveal">
+                    <span class="section-kicker">Two ways into Elite</span>
+                    <h2 class="section-title">Choose the path that matches your student’s season.</h2>
+                    <p class="section-lead">
+                        Both Elite paths include high-touch support, parent partnership, and a whole-student lens.
+                        The difference is where we spend most of our time together.
+                    </p>
+                </div>
+
+                <div class="elite-path-grid">
+                    <!-- Path 1: AP Physics Elite -->
+                    <article class="elite-path-card reveal">
+                        <div class="elite-path-tag">Path 01 • Subject-Deep Dive</div>
+                        <h3 class="elite-path-title">AP Physics Elite (1:1)</h3>
+                        <p class="elite-path-subtitle">
+                            For students who want a calm, confident command of AP Physics—without spending the
+                            entire year in survival mode.
+                        </p>
+                        <ul class="elite-path-list">
+                            <li>Concept-level teaching that goes beyond formula memorization.</li>
+                            <li>Past exam walkthroughs, test-taking strategy, and pacing plans.</li>
+                            <li>Targeted practice sets with feedback so studying actually works.</li>
+                            <li>Optional recorded sessions so key explanations are never “one and done.”</li>
+                        </ul>
+                        <p class="elite-path-pricing">
+                            Investment • <span>$75/hr</span>
+                        </p>
+                        <div class="btn-wrapper">
+                            <a href="#contact" class="btn btn-primary">
+                                Request AP Physics consult
+                            </a>
+                            <a href="#flow" class="btn btn-ghost">
+                                See what a month looks like
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Path 2: Hybrid Coaching + Tutoring -->
+                    <article class="elite-path-card reveal">
+                        <div class="elite-path-tag">Path 02 • Hybrid Elite</div>
+                        <h3 class="elite-path-title">Hybrid Coaching + Tutoring</h3>
+                        <p class="elite-path-subtitle">
+                            For students who need both subject support and serious help with workload, habits,
+                            and the mental load of school.
+                        </p>
+                        <ul class="elite-path-list">
+                            <li>Live support in math/science that prioritizes understanding over rushing.</li>
+                            <li>Weekly check-ins to set goals, adjust calendars, and triage what matters most.</li>
+                            <li>Study-system design using proven strategies like retrieval, spacing, and interleaving.</li>
+                            <li>Space to talk about perfectionism, faith, meaning, and identity—if and when they’re ready.</li>
+                        </ul>
+                        <p class="elite-path-pricing">
+                            Investment • <span>$100/hr</span>
+                        </p>
+                        <div class="btn-wrapper">
+                            <a href="#contact" class="btn btn-primary">
+                                Start Hybrid coaching
+                            </a>
+                            <a href="#compare" class="btn btn-ghost">
+                                Compare Elite with Core & Cohort
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHARED BENEFITS -->
+        <section class="section elite-includes" id="included">
+            <div class="container">
+                <div class="elite-includes-header reveal">
+                    <span class="section-kicker">What every Elite student receives</span>
+                    <h2 class="section-title">One tier, all-in support.</h2>
+                    <p class="section-lead">
+                        Regardless of which path you choose, every Elite student is surrounded—not smothered—
+                        by systems, communication, and care that make their life lighter, not heavier.
+                    </p>
+                </div>
+
+                <div class="elite-feature-grid">
+                    <article class="elite-feature reveal">
+                        <small>Core Feature</small>
+                        <h3>Custom study systems</h3>
+                        <p>
+                            We design a living study plan around your student’s actual week—tests, projects,
+                            rehearsals, games—and adjust it as life happens. No generic “study harder” advice.
+                        </p>
+                    </article>
+
+                    <article class="elite-feature reveal">
+                        <small>Core Feature</small>
+                        <h3>Executive-function coaching</h3>
+                        <p>
+                            Planning, prioritizing, time-blocking, and breaking down big tasks into doable steps.
+                            Practical, non-shaming coaching that fits how their brain actually works.
+                        </p>
+                    </article>
+
+                    <article class="elite-feature reveal">
+                        <small>Parent Partnership</small>
+                        <h3>Monthly parent strategy call</h3>
+                        <p>
+                            A dedicated time to zoom out, celebrate wins, name bottlenecks, and agree on next
+                            steps—without awkward “in front of the student” conversations mid-session.
+                        </p>
+                    </article>
+
+                    <article class="elite-feature reveal">
+                        <small>Between Sessions</small>
+                        <h3>Quick-message support</h3>
+                        <p>
+                            Short check-ins and clarifying questions between sessions, so your student isn’t stuck
+                            on a concept or melting down the night before a test.
+                        </p>
+                    </article>
+
+                    <article class="elite-feature reveal">
+                        <small>Whole Student</small>
+                        <h3>Holistic check-ins</h3>
+                        <p>
+                            Space to talk about stress, identity, faith, calling, and how school fits into a bigger
+                            story—for students who want that integration.
+                        </p>
+                    </article>
+
+                    <article class="elite-feature reveal">
+                        <small>Methodology</small>
+                        <h3>Evidence-backed approaches only</h3>
+                        <p>
+                            Retrieval practice, spaced repetition, interleaving, metacognition. No trends,
+                            gimmicks, or pop-psych fads—just what actually helps students learn.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPARISON BAND -->
+        <section class="section elite-compare" id="compare">
+            <div class="container elite-compare-inner">
+                <div class="reveal">
+                    <div class="compare-col-label">Core & Cohort</div>
+                    <h3 class="compare-col-title">Clarity Core & Clarity Cohort</h3>
+                    <div class="compare-table">
+                        <div class="compare-row">
+                            <span class="compare-label">Focus</span>
+                            <span class="compare-value">Consistent subject support</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Format</span>
+                            <span class="compare-value">Weekly 1:1 or small-group sessions</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Between sessions</span>
+                            <span class="compare-value">Light check-ins as needed</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Parents</span>
+                            <span class="compare-value">Updates as time allows</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Best for</span>
+                            <span class="compare-value">Students who mainly need help understanding the content</span>
+                        </div>
+                    </div>
+                    <p class="compare-footnote">
+                        Prefer something simpler or lower-commitment? Core and Cohort are designed to be
+                        straightforward, steady support.
+                    </p>
+                    <div class="btn-wrapper" style="margin-top: 1.2rem;">
+                        <a href="/services.html" class="btn btn-secondary">
+                            View all services
+                        </a>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <div class="compare-col-label">Elite Tier</div>
+                    <h3 class="compare-col-title">Clarity Elite</h3>
+                    <div class="compare-table">
+                        <div class="compare-row">
+                            <span class="compare-label">Focus</span>
+                            <span class="compare-value">Subject mastery + executive-function + whole-student formation</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Format</span>
+                            <span class="compare-value">High-touch 1:1 with flexible session design</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Between sessions</span>
+                            <span class="compare-value">Quick-message support and targeted check-ins</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Parents</span>
+                            <span class="compare-value">Monthly strategy calls plus ongoing alignment</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Best for</span>
+                            <span class="compare-value">Students whose challenge is “everything at once”, not just one class</span>
+                        </div>
+                    </div>
+                    <p class="compare-footnote">
+                        Elite is for families who want a single, trusted partner watching the whole picture:
+                        grades, habits, mental load, and long-term formation.
+                    </p>
+                    <div class="btn-wrapper" style="margin-top: 1.2rem;">
+                        <a href="#contact" class="btn btn-primary">
+                            Step up to Elite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO IT'S FOR / NOT FOR -->
+        <section class="section elite-fit" id="fit">
+            <div class="container">
+                <div class="section-intro reveal" style="margin-bottom: 2.8rem; text-align: center;">
+                    <span class="section-kicker">Fit matters</span>
+                    <h2 class="section-title">Is Clarity Elite the right tier?</h2>
+                    <p class="section-lead" style="margin: 0 auto;">
+                        Elite is intentionally small. This helps your student stay known—and helps us keep the
+                        kind of boundaries and care that make the work sustainable.
+                    </p>
+                </div>
+
+                <div class="elite-fit-grid">
+                    <article class="fit-card reveal">
+                        <div class="fit-label good">Clarity Elite is a strong fit if…</div>
+                        <h3>your student is capable and overloaded.</h3>
+                        <ul class="fit-list">
+                            <li>They’re in honors/AP or advanced math/science and want to fully own the material.</li>
+                            <li>They’re juggling sports, music, work, ministry, clubs, or leadership roles.</li>
+                            <li>They’re smart, but their systems, stress, or self-talk keep getting in the way.</li>
+                            <li>You want faith-safe, academically serious support without culture-war drama.</li>
+                            <li>Your family is willing to experiment with new routines and boundaries.</li>
+                        </ul>
+                    </article>
+
+                    <article class="fit-card reveal">
+                        <div class="fit-label not">Clarity Elite is not a fit if…</div>
+                        <h3>you just need quick homework help.</h3>
+                        <ul class="fit-list not">
+                            <li>You primarily want someone to make sure assignments get done, not to build skills.</li>
+                            <li>There is no interest in adjusting study habits, schedule, or expectations.</li>
+                            <li>You’re mainly looking for the lowest hourly rate, regardless of depth or access.</li>
+                            <li>The student is not ready to be honest about effort, patterns, or stress (yet).</li>
+                            <li>You’d rather experiment with lighter support first—Core or Cohort is better for that.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- A MONTH INSIDE ELITE -->
+        <section class="section elite-flow" id="flow">
+            <div class="container flow-grid">
+                <div class="reveal">
+                    <span class="section-kicker">Inside the work</span>
+                    <h2 class="section-title">What one Elite month can look like.</h2>
+                    <p class="section-lead">
+                        Every student’s plan is custom, but the rhythm is steady: clarify, build, practice, refine.
+                        Here’s a sample of how the first month often unfolds.
+                    </p>
+
+                    <ol class="flow-steps" style="margin-top: 2.2rem;">
+                        <li class="flow-step">
+                            <div class="flow-step-label">Week 0</div>
+                            <div class="flow-step-title">Intake & diagnostic.</div>
+                            <p class="flow-step-body">
+                                Family + student intake form, recent grades, current courses, schedule, and
+                                values. We define success for this season and agree on boundaries.
+                            </p>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-label">Week 1</div>
+                            <div class="flow-step-title">Deep-dive session.</div>
+                            <p class="flow-step-body">
+                                We map what they understand, where they’re guessing, and what their current
+                                study patterns look like. Then we pick one or two high-leverage changes.
+                            </p>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-label">Week 2</div>
+                            <div class="flow-step-title">System build-out.</div>
+                            <p class="flow-step-body">
+                                We design calendars, “minimum viable” routines, and realistic study blocks
+                                that match their bandwidth—not a fantasy version of their week.
+                            </p>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-label">Week 3</div>
+                            <div class="flow-step-title">Refine & pressure-test.</div>
+                            <p class="flow-step-body">
+                                We test the system against real assignments, labs, quizzes, or tests. We
+                                adjust what’s too heavy, too light, or too vague.
+                            </p>
+                        </li>
+                        <li class="flow-step">
+                            <div class="flow-step-label">Week 4</div>
+                            <div class="flow-step-title">Parent strategy call.</div>
+                            <p class="flow-step-body">
+                                We review progress, name what’s working, surface concerns, and agree on
+                                the next month’s priorities—all without putting your student on the spot.
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+
+                <aside class="flow-aside reveal">
+                    <h3>Between-session support.</h3>
+                    <p>
+                        Life doesn’t respect tutoring schedules. Elite students can send quick messages when they’re:
+                    </p>
+                    <ul style="padding-left: 1.2rem; margin-top: 0.8rem; font-size: 0.94rem;">
+                        <li>Stuck on a specific problem or lab.</li>
+                        <li>Staring down an exam and unsure what to prioritize.</li>
+                        <li>Feeling overwhelmed and needing to zoom out for 5 minutes.</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        It’s not 24/7 crisis management—but it is a safety net between sessions, so small
+                        snags don’t become full meltdowns.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- BRAND STRIP / ABOUT (anchors #about) -->
+        <section class="section elite-brand" id="about">
+            <div class="container elite-brand-inner">
+                <div class="reveal">
+                    <h2>Built by a teacher who refused to choose between rigor and soul.</h2>
+                    <p>
+                        Clarity Academics was started by a former high school physics teacher who watched
+                        bright, thoughtful students burn out under the weight of grades, expectations, and
+                        unanswered questions. Clarity was built as an answer to that tension.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Here, we care about transcripts—but we care just as much about who your student is
+                        becoming while they earn them.
+                    </p>
+                </div>
+
+                <div class="reveal">
+                    <ul class="elite-values-list">
+                        <li>Truth over trend: we use what actually helps students learn, not what looks good online.</li>
+                        <li>Clarity is kindness: honest feedback, clear plans, and no shame-based motivation.</li>
+                        <li>Faith and science are not enemies: questions and convictions are both welcome.</li>
+                        <li>Formation over performance: grades matter, but they are not the whole story.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section elite-faq" id="faq">
+            <div class="container">
+                <div class="section-intro reveal" style="text-align: center; margin-bottom: 2.2rem;">
+                    <span class="section-kicker">Questions, answered</span>
+                    <h2 class="section-title">Elite FAQ</h2>
+                    <p class="section-lead" style="margin: 0 auto;">
+                        A few of the most common questions families ask before stepping into Clarity Elite.
+                    </p>
+                </div>
+
+                <div class="faq-grid">
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                Can we start with Core or Cohort and move up to Elite later?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            Yes. Many families start with Core or Cohort to stabilize grades, then move into
+                            Elite when they’re ready for deeper coaching and between-session access. We’ll help
+                            you decide if and when that shift makes sense.
+                        </p>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                Does my student have to be in AP Physics to join Elite?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            No. AP Physics Elite is one path, but the Hybrid Coaching + Tutoring path is open to
+                            students in upper-level math or science who need whole-picture support. We’ll talk
+                            through courses, goals, and bandwidth in your consult.
+                        </p>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                Do you work with students who are already doing “fine” in school?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            Absolutely. Some Elite students already have strong grades but feel constantly behind,
+                            anxious, or unsure how to sustain their pace. Elite can help them shift from grinding
+                            to grounded.
+                        </p>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                How does scheduling and billing work for Elite?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            We’ll agree on a weekly time (or times) that works with your family’s rhythms. Billing
+                            is handled in simple, predictable blocks—no surprise add-ons. Full policy details are
+                            shared before you commit, and we’ll walk through them together.
+                        </p>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                What if my student is anxious or hesitant about coaching?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            That’s normal. We never force vulnerability. The first sessions focus on calm,
+                            concrete wins: understanding the material better, getting organized, reducing “surprise”
+                            stress. Trust tends to follow results.
+                        </p>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span>
+                                What happens if we need to pause or change tiers?
+                                <em>+</em>
+                            </span>
+                        </summary>
+                        <p>
+                            Life happens. If you need to pause or switch tiers, we’ll talk through options and keep
+                            communication clear so your student never feels blindsided by adult logistics.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA / APPLY (#contact) -->
+        <section class="section elite-final-cta" id="contact">
+            <div class="container">
+                <h2 class="reveal">Ready to step into Elite support?</h2>
+                <p class="reveal">
+                    Tell us where your student is now, where you hope they’ll be in the next 6–12 months,
+                    and what’s been getting in the way. We’ll respond with honest recommendations—even if
+                    Elite isn’t the right next step.
+                </p>
+
+                <div class="btn-wrapper reveal" style="justify-content: center; margin-bottom: 1.4rem;">
+                    <!-- You can swap these hrefs for Calendly or your intake form link -->
+                    <a href="/clarity-elite-apply" class="btn btn-primary">
+                        Apply for Clarity Elite
+                    </a>
+                    <a href="/book-insight-session" class="btn btn-secondary">
+                        Book 20-minute parent consult
+                    </a>
+                </div>
+
+                <div class="elite-final-meta reveal">
+                    <p>
+                        <strong>Not a binding contract.</strong> If after the first Elite session it’s clearly
+                        not the right fit, we’ll talk it through and either adjust the plan or point you toward
+                        a better option. The goal is alignment, not pressure.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (MATCH SERVICES PAGE) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clarity Academics</h4>
+                    <p>Lexington, KY<br>Online Worldwide</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <!-- TODO: Update these links to the correct program pages -->
+                    <a href="/clarity-elite.html">Clarity Elite</a>
+                    <a href="/services.html#clarity-core">Clarity Core</a>
+                    <a href="/services.html#clarity-cohort">Clarity Cohort</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <!-- TODO: Update these links when legal pages exist -->
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="currentYear">2025</span> Clarity Academics. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS (MOBILE MENU, REVEAL, NAV PADDING) -->
+    <script>
+        // Mobile menu toggle + focus management
+        let _previousBodyOverflow = '';
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+
+            if (!menu || !hamburger) return;
+
+            const isActive = !menu.classList.contains('active');
+            menu.classList.toggle('active', isActive);
+
+            hamburger.setAttribute('aria-expanded', String(isActive));
+            menu.setAttribute('aria-hidden', String(!isActive));
+
+            if (isActive) {
+                _previousBodyOverflow = document.body.style.overflow || '';
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('menu-open');
+
+                const firstLink = menu.querySelector('a');
+                if (firstLink) firstLink.focus();
+            } else {
+                document.body.style.overflow = _previousBodyOverflow;
+                document.body.classList.remove('menu-open');
+                hamburger.focus();
+            }
+        }
+
+        // Close mobile menu with ESC
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const menu = document.getElementById('mobileMenu');
+                if (menu && menu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            if (!menu || !hamburger) return;
+            if (!menu.classList.contains('active')) return;
+
+            const clickInsideMenu = menu.contains(event.target);
+            const clickOnHamburger = hamburger.contains(event.target);
+
+            if (!clickInsideMenu && !clickOnHamburger) {
+                toggleMenu();
+            }
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', () => {
+            const menu = document.getElementById('mobileMenu');
+            if (window.innerWidth >= 960 && menu && menu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Reveal on scroll (match services)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        function handleReveal() {
+            const windowHeight = window.innerHeight;
+            const offset = 70;
+
+            revealElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - offset) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleReveal);
+        window.addEventListener('load', handleReveal);
+
+        // Nav scroll state
+        const nav = document.getElementById('navbar');
+
+        function handleNavScroll() {
+            if (!nav) return;
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleNavScroll);
+        window.addEventListener('load', handleNavScroll);
+
+        // Sync body padding with fixed nav height
+        (function syncBodyPaddingWithNav() {
+            const navbar = document.getElementById('navbar');
+            if (!navbar) return;
+
+            function updateBodyPadding() {
+                const height = Math.ceil(navbar.getBoundingClientRect().height);
+                document.body.style.paddingTop = height + 'px';
+            }
+
+            updateBodyPadding();
+
+            if ('ResizeObserver' in window) {
+                const ro = new ResizeObserver(updateBodyPadding);
+                ro.observe(navbar);
+            } else {
+                window.addEventListener('resize', updateBodyPadding);
+            }
+        })();
+
+        // Year in footer
+        const yearSpan = document.getElementById('currentYear');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    </script>
+</body>
+</html>
