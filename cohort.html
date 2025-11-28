@@ -329,43 +329,35 @@
 
         /* --- FOOTER --- */
         footer {
-            padding: 3.5rem 0 2.5rem;
-            border-top: 1px solid rgba(0,0,0,0.04);
-            background: rgba(239, 233, 225, 0.9);
-            backdrop-filter: blur(12px);
-            margin-top: 2rem;
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+            padding: 5rem 2rem 2rem;
         }
-
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.2fr;
-            gap: 2.5rem;
-            align-items: flex-start;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 3rem;
         }
-
         .footer-col h4 {
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
+            color: var(--rich-sand);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
-
-        .footer-col p,
         .footer-col a {
-            font-size: 0.9rem;
-            color: rgba(58, 81, 103, 0.9);
-        }
-
-        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: 0.3s;
             display: block;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.8rem;
         }
-
-        .footer-bottom {
-            font-size: 0.8rem;
-            color: rgba(58, 81, 103, 0.8);
-            text-align: center;
+        .footer-col a:hover {
+            color: var(--rich-sand);
+            transform: translateX(5px);
         }
 
         /* --- REVEAL ANIMATION --- */
