@@ -79,6 +79,11 @@
             z-index: 2;
         }
 
+        /* NEW UTILITY CLASS FOR CENTERING */
+        .centered-page {
+            text-align: center;
+        }
+
         /* --- BUTTONS --- */
         .btn-wrapper { position: relative; display: inline-block; }
         .btn {
@@ -145,7 +150,11 @@
             content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
             background: var(--rust-clay); transition: 0.3s;
         }
-        .nav-links a:hover::after { width: 100%; }
+        /* --- ACTIVE STATE: Keeps the underline width at 100% --- */
+        .nav-links a:hover::after,
+        .nav-links a.active::after { 
+            width: 100%; 
+        }
 
         /* --- MOBILE MENU --- */
         .hamburger { display: none; cursor: pointer; z-index: 1002; flex-direction: column; gap: 6px; background: transparent; border: none; }
@@ -271,8 +280,8 @@
     </nav>
 
     <!-- MAIN CONTENT START -->
-    <!-- Allows content to be placed here. 'min-height: 80vh' ensures footer stays at bottom even with little content. -->
-    <main class="container" style="min-height: 80vh; padding-top: 4rem; padding-bottom: 4rem;">
+    <!-- Added 'centered-page' class here to center all content by default -->
+    <main class="container centered-page" style="min-height: 80vh; padding-top: 4rem; padding-bottom: 4rem;">
         
         <!-- Example Page Header -->
         <div class="reveal">
@@ -280,7 +289,9 @@
                 Page Category
             </span>
             <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--dusty-indigo);">Page Title Here</h1>
-            <p style="font-size: 1.1rem; max-width: 800px; color: var(--dark-indigo);">
+            
+            <!-- Margin auto is needed on the paragraph itself to center the block if it has a max-width -->
+            <p style="font-size: 1.1rem; max-width: 800px; color: var(--dark-indigo); margin-left: auto; margin-right: auto;">
                 This is your new base template. You can add sections, text, and images here using the existing styles.
             </p>
         </div>
@@ -295,23 +306,23 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4>Clarity Academics</h4>
-                    <p>Lexington, KY<br>Online Worldwide</p>
+                    <h4 style="text-align: left;">Clarity Academics</h4>
+                    <p style="text-align: left;">Lexington, KY<br>Online Worldwide</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Programs</h4>
-                    <a href="/elite.html">Elite</a>
-                    <a href="/core.html">Core</a>
-                    <a href="/cohort.html">Cohort</a>
+                    <h4 style="text-align: left;">Programs</h4>
+                    <a href="/elite.html" style="text-align: left;">Elite</a>
+                    <a href="/core.html" style="text-align: left;">Core</a>
+                    <a href="/cohort.html" style="text-align: left;">Cohort</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Legal</h4>
-                    <a href="/privacy-policy.html">Privacy Policy</a>
-                    <a href="/terms-of-service.html">Terms of Service</a>
+                    <h4 style="text-align: left;">Legal</h4>
+                    <a href="/privacy-policy.html" style="text-align: left;">Privacy Policy</a>
+                    <a href="/terms-of-service.html" style="text-align: left;">Terms of Service</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact</h4>
-                    <a href="mailto:clarityacademics@gmail.com">clarityacademics@gmail.com</a>
+                    <h4 style="text-align: left;">Contact</h4>
+                    <a href="mailto:clarityacademics@gmail.com" style="text-align: left;">clarityacademics@gmail.com</a>
                 </div>
             </div>
 
@@ -329,6 +340,21 @@
 
         // Auto-update year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- AUTOMATIC ACTIVE LINK HIGHLIGHT ---
+        function highlightActiveLink() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                // If the link path matches the current browser path (e.g. "/mission.html")
+                // it adds the 'active' class which triggers the underline style.
+                if (link.pathname === currentPath && link.getAttribute('href') !== '#') {
+                    link.classList.add('active');
+                }
+            });
+        }
+        highlightActiveLink();
 
         const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let _previousBodyOverflow = '';
