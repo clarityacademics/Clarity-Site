@@ -136,7 +136,7 @@
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.04;
+            opacity: 0.7;
             background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJueiI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbnoiKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==');
             mix-blend-mode: multiply;
         }
@@ -475,20 +475,37 @@
         /* =========================
            FOOTER (SHARED)
            ========================= */
+        /* --- FOOTER --- */
         footer {
-            padding: 3rem 2rem 2rem;
-            font-size: 0.85rem;
-            color: rgba(58,81,103,0.8);
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+            padding: 5rem 2rem 2rem;
         }
-
-        footer .footer-inner {
-            max-width: var(--container-width);
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 3rem;
+        }
+        .footer-col h4 {
+            color: var(--rich-sand);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .footer-col a:hover {
+            color: var(--rich-sand);
+            transform: translateX(5px);
         }
 
         /* =========================
