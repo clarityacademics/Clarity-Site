@@ -39,10 +39,10 @@
             --container-width: 1200px;
 
             /* Nav */
-            --nav-bg: rgba(239, 233, 225, 0.9);
-            --nav-bg-scrolled: rgba(255, 255, 255, 0.96);
-            --nav-border: rgba(255,255,255,0.5);
-            --nav-shadow-scrolled: 0 12px 30px rgba(0,0,0,0.08);
+            --nav-bg: rgba(239, 233, 225, 0.85);
+            --nav-bg-scrolled: rgba(255, 255, 255, 0.95);
+            --nav-border: rgba(255,255,255,0.3);
+            --nav-shadow-scrolled: 0 12px 30px rgba(0,0,0,0.05);
         }
 
         /* =========================
@@ -252,16 +252,16 @@
             justify-content: space-between;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--nav-border);
             transition:
-                padding 0.3s ease,
+                padding 0.4s ease,
                 box-shadow 0.3s ease,
                 background 0.3s ease;
         }
 
         nav.scrolled {
-            padding: 0.7rem 2rem;
+            padding: 0.8rem 2rem;
             background: var(--nav-bg-scrolled);
             box-shadow: var(--nav-shadow-scrolled);
         }
@@ -271,17 +271,18 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            z-index:1001;
         }
 
         .logo-svg {
-            height: 72px;
+            height: 75px;
             width: auto;
             display: block;
-            transition: height 0.25s ease, transform 0.25s ease;
+            transition: height 0.3s ease, transform 0.3s ease;
         }
 
         nav.scrolled .logo-svg {
-            height: 58px;
+            height: 60px;
         }
 
         .brand-text h4 {
@@ -298,7 +299,7 @@
             font-family: var(--font-sans);
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.15em;
             color: var(--moss-green);
         }
 
@@ -312,9 +313,9 @@
             position: relative;
             text-decoration: none;
             font-family: var(--font-sans);
-            font-size: 0.82rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.05em;
             font-weight: 500;
             color: var(--dusty-indigo);
             padding-bottom: 4px;
@@ -325,11 +326,11 @@
             content: '';
             position: absolute;
             left: 0;
-            bottom: 0;
+            bottom: -5px;
             width: 0%;
             height: 2px;
             background: linear-gradient(90deg, var(--rust-clay), var(--rich-sand));
-            transition: width 0.22s ease;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -344,20 +345,21 @@
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 4px;
             margin-left: auto;
+            z-index: 1002;
         }
 
         .hamburger .bar {
-            width: 24px;
-            height: 2px;
-            border-radius: 999px;
+            width: 30px;
+            height: 3px;
+            border-radius: 3px;
             background: var(--dusty-indigo);
-            transition: transform 0.25s ease, opacity 0.25s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         body.menu-open .hamburger .bar:nth-child(1) {
@@ -375,7 +377,7 @@
         .mobile-menu {
             position: fixed;
             inset: 0;
-            background: rgba(12, 18, 22, 0.94);
+            background: var(--oat-cream);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -704,12 +706,36 @@
     </section>
 </main>
 
-<footer>
-    <div class="footer-inner">
-        <div>© <span id="year"></span> Clarity Academics. All rights reserved.</div>
-        <div>Based in [Your City], tutoring students online nationwide.</div>
-    </div>
-</footer>
+<!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clarity Academics</h4>
+                    <p>Lexington, KY<br>Online Worldwide</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <a href="/elite.html">Elite</a>
+                    <a href="/core.html">Core</a>
+                    <a href="/cohort.html">Cohort</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:clarityacademics@gmail.com">clarityacademics@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © <span id="year"></span> Clarity Academics. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
 <script>
     (function () {
