@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Clarity Academics | [Page Title]</title>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clarity Cohort | Small-Group Support Without the Chaos</title>
+
     <!-- BRAND FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-   
+    <link href="https://fonts.googleapis.com/css2?family=Cormora...tserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- ICONS -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- BRAND VARIABLES --- */
+        /* --- BRAND VARIABLES (EXACTLY LIKE V3) --- */
         :root {
             /* Colors */
             --dusty-indigo: #3A5167;
@@ -32,7 +32,7 @@
             --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
             --font-sans: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
 
-            /* Spacing */
+            /* Spacing (RESTORED TO 8rem) */
             --section-padding: 8rem 2rem;
             --container-width: 1200px;
         }
@@ -49,8 +49,9 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding top is handled by JS to match Nav height */
         }
+
+        /* body.wix-frame removed */
 
         body.page-inactive * {
             animation-play-state: paused !important;
@@ -58,59 +59,15 @@
         }
 
         h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.2; }
-        p { 
-            font-family: var(--font-sans); 
-            color: var(--dusty-indigo); /* This is the general paragraph color */
-        }
+        p { font-family: var(--font-sans); color: var(--dusty-indigo); }
 
-        /* --- TEXTURE (NOISE) --- */
+        /* --- TEXTURE --- */
         .noise {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 9000; opacity: 0.04;
             background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJneiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIxIi8+PC9zdmc+');
         }
 
-        /* --- UTILITIES --- */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* NEW UTILITY CLASS FOR CENTERING */
-        .centered-page {
-            text-align: center;
-        }
-
-        /* --- BUTTONS --- */
-        .btn-wrapper { position: relative; display: inline-block; }
-        .btn {
-            position: relative; display: inline-flex; align-items: center; justify-content: center;
-            padding: 1.1rem 3rem; border-radius: 50px; text-decoration: none;
-            font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-            transition: all 0.3s ease; cursor: pointer; border: none; overflow: hidden; z-index: 1;
-        }
-        .btn-primary {
-            background-color: var(--rust-clay); color: var(--white);
-            box-shadow: 0 10px 30px rgba(178, 106, 79, 0.3);
-        }
-        .btn-primary::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
-            transform: translateX(-100%); transition: transform 0.6s;
-        }
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(178, 106, 79, 0.5);
-            background-color: var(--dark-clay);
-        }
-        .btn-primary:hover::before { transform: translateX(100%); }
-        .btn-secondary { background-color: transparent; border: 2px solid var(--dusty-indigo); color: var(--dusty-indigo); }
-        .btn-secondary:hover { background-color: var(--dusty-indigo); color: var(--white); }
-
-        .btn:focus { outline: 3px solid rgba(178,106,79,0.2); outline-offset: 3px; }
 
         /* --- NAVIGATION --- */
         nav {
@@ -150,13 +107,9 @@
             content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
             background: var(--rust-clay); transition: 0.3s;
         }
-        /* --- ACTIVE STATE: Keeps the underline width at 100% --- */
-        .nav-links a:hover::after,
-        .nav-links a.active::after { 
-            width: 100%; 
-        }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* --- MOBILE MENU --- */
+        /* --- MOBILE MENU (Hidden on Desktop) --- */
         .hamburger { display: none; cursor: pointer; z-index: 1002; flex-direction: column; gap: 6px; background: transparent; border: none; }
         .bar { width: 30px; height: 3px; background-color: var(--dusty-indigo); transition: 0.3s; border-radius: 3px; }
         
@@ -173,16 +126,206 @@
             color: var(--dusty-indigo); text-decoration: none;
         }
 
-        /* --- ANIMATION CLASSES (REVEAL & FADE) --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- BUTTONS --- */
+        .btn-wrapper {
+            position: relative;
+            display: inline-flex;
         }
-        .reveal {
-            opacity: 0; transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.95rem 2.4rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--rust-clay), var(--dark-clay));
+            color: var(--oat-cream);
+            box-shadow: 0 14px 34px rgba(178, 106, 79, 0.5);
+        }
+
+        .btn-primary::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+            transform: translateX(-120%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(120%);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(178, 106, 79, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1.5px solid var(--dusty-indigo);
+            color: var(--dusty-indigo);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+        }
+
+        /* --- HERO (SERVICES STYLE) --- */
+        .services-hero {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(221, 190, 155, 0.3), transparent 60%);
+            position: relative;
+        }
+
+        .services-hero .sub-tag {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--rust-clay);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .services-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4.1rem);
+            margin-bottom: 1rem;
+        }
+
+        .services-hero p {
+            max-width: 640px;
+            margin: 0.5rem auto 0;
+            font-size: 1.02rem;
+        }
+
+        /* --- UTILS / SECTIONS --- */
+        .section {
+            padding: var(--section-padding);
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-intro span.kicker {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rust-clay);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-intro h2 {
+            font-size: clamp(2.3rem, 3.5vw, 2.8rem);
+            margin-bottom: 0.9rem;
+        }
+
+        .section-intro p {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* --- DECISION GRID / CARDS (REUSED FROM SERVICES) --- */
+        .comparison-section {
+            padding-bottom: 5.5rem;
+        }
+
+        .decision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 2.6rem;
+            align-items: stretch;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            position: relative;
+            background: #ffffff;
+            padding: 2.4rem 2.2rem;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card.basic {
+            opacity: 0.96;
+            transform: scale(0.98);
+        }
+
+        .service-card.basic:hover {
+            transform: scale(1) translateY(-4px);
+            box-shadow: 0 18px 46px rgba(0,0,0,0.05);
+        }
+
+        .service-card.highlight {
+            border-color: rgba(58, 81, 103, 0.3);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 46px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            padding-bottom: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .benefit-list {
+            list-style: none;
+            margin-bottom: 0;
+            padding-left: 0;
+        }
+
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--dark-indigo);
+        }
+
+        .benefit-list i {
+            font-size: 1.2rem;
+            color: var(--rust-clay);
+            flex-shrink: 0;
+        }
+
+        .benefit-list li.dim {
+            opacity: 0.65;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -205,13 +348,6 @@
             font-size: 1.2rem;
             font-weight: 700;
         }
-        /* --- FIX: Override the general <p> style inside the footer-col --- */
-        .footer-col p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 0;
-        }
         .footer-col a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
@@ -223,23 +359,61 @@
             color: var(--rich-sand);
             transform: translateX(5px);
         }
-        .footer-bottom {
-            max-width: 1200px; margin: 2rem auto 0;
-            text-align: center; font-size: 0.85rem; opacity: 0.6;
+
+        /* --- REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
-        /* --- RESPONSIVE LOGIC --- */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 960px) {
-            .container { padding: 0 1.5rem; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
+            nav {
+                padding-inline: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: inline-flex;
+            }
+
+            .services-hero {
+                padding-top: 7rem;
+                padding-bottom: 4rem;
+            }
+
+            .decision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-hero h1 {
+                font-size: 2.3rem;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- TEXTURE OVERLAY -->
-    <div class="noise"></div>
+    <div class="noise" aria-hidden="true"></div>
 
     <!-- MOBILE MENU OVERLAY -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
@@ -279,50 +453,305 @@
         </button>
     </nav>
 
-    <!-- MAIN CONTENT START -->
-    <!-- Added 'centered-page' class here to center all content by default -->
-    <main class="container centered-page" style="min-height: 80vh; padding-top: 4rem; padding-bottom: 4rem;">
-        
-        <!-- Example Page Header -->
-        <div class="reveal">
-            <span style="text-transform: uppercase; letter-spacing: 0.2em; color: var(--moss-green); font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 1rem;">
-                Page Category
-            </span>
-            <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--dusty-indigo);">Page Title Here</h1>
-            
-            <!-- Margin auto is needed on the paragraph itself to center the block if it has a max-width -->
-            <p style="font-size: 1.1rem; max-width: 800px; color: var(--dark-indigo); margin-left: auto; margin-right: auto;">
-                This is your new base template. You can add sections, text, and images here using the existing styles.
+    <!-- HERO -->
+    <header id="hero" class="services-hero cohort-hero">
+        <div class="container">
+            <span class="sub-tag reveal">Small-group labs</span>
+            <h1 class="reveal" style="transition-delay: 0.06s;">Clarity Cohort: Mini classrooms without the chaos.</h1>
+            <p class="reveal" style="transition-delay: 0.12s;">
+                Cohort is for students who share the same class and want to work through it together&mdash;at a calmer pace,
+                in a smaller room, with a coach who keeps everyone on track. Same teacher, same units, less noise.
             </p>
         </div>
+    </header>
 
-        <!-- Add your page content here -->
+    <!-- WHAT IS COHORT -->
+    <section class="section" id="what-is-cohort">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">What it is</span>
+                <h2>Like class, but quieter and more intentional.</h2>
+                <p>
+                    Clarity Cohort turns a handful of students from the same course into a steady mini-classroom. They bring
+                    their real notes, homework, and tests from school. We slow the material down, clear confusion, and give
+                    them time to practice&mdash;without trying to hold thirty other students at the same time.
+                </p>
+            </div>
 
-    </main>
-    <!-- MAIN CONTENT END -->
+            <div class="decision-grid">
+                <div class="service-card basic reveal">
+                    <div class="card-header">
+                        <h3>Built around one real class.</h3>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem;">
+                            Cohorts work best when everyone is in the same course (often with the same teacher). That way,
+                            examples, practice, and test prep all line up with what they are seeing in class.
+                        </p>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-check-circle"></i> Same syllabus and unit flow.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Shared upcoming quizzes, labs, and exams.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> One place to ask all the "I didn't catch that" questions.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card highlight reveal">
+                    <div class="card-header">
+                        <h3>A mini team instead of a lone student.</h3>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem;">
+                            Students see that they are not the only one confused, stuck, or behind. That alone can lower shame
+                            and make it easier to ask for help and try again.
+                        </p>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-check-circle"></i> Calm accountability: they show up because their friends do.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Space to compare approaches and see other ways of thinking.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Wins are shared, not isolated&mdash;confidence builds faster.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW A COHORT STARTS -->
+    <section class="section" id="how-it-starts">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">How it starts</span>
+                <h2>From "my friend has a group" to a weekly lab.</h2>
+                <p>
+                    A Cohort usually begins with one simple sentence: "My friend is in Clarity and I want to join their group."
+                    Parents coordinate, we check that the mix is right, and then that class turns into a weekly learning lab.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="service-card reveal">
+                    <div class="card-header">
+                        <h3>Step 1: Students talk.</h3>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem;">
+                            A student hears that a classmate is getting support, or a small group realizes they are all confused
+                            by the same unit. They decide they'd rather work through it together than struggle alone.
+                        </p>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-chat-circle-dots"></i> The group is rooted in real friendships or shared classes.</li>
+                        <li><i class="ph-fill ph-smiley"></i> Students start more relaxed because they already know who will be there.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="card-header">
+                        <h3>Step 2: Parents &amp; Clarity build the group.</h3>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem;">
+                            One parent reaches out as the point person. We gather names, classes, and goals, make sure the mix
+                            is a good fit, and lock in a weekly time that works across families.
+                        </p>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-calendar-check"></i> Same day and time each week for predictability.</li>
+                        <li><i class="ph-fill ph-users-three"></i> Group size kept intentionally small (usually 3&ndash;5 students).</li>
+                        <li><i class="ph-fill ph-clipboard-text"></i> We confirm fit before we ever meet so no one feels constantly behind.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MINI CLASSROOM, NOT CHAOS -->
+    <section class="section" id="mini-classroom">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">Environment</span>
+                <h2>Everything helpful about class. None of the chaos.</h2>
+                <p>
+                    A good classroom can be energizing&mdash;until it is too loud, too fast, or too full of distractions.
+                    Cohort keeps the benefits of learning with peers and removes the parts that overwhelm sensitive, thoughtful students.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="service-card basic reveal">
+                    <div class="card-header">
+                        <h3>What we keep from the classroom</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-check-circle"></i> Shared "aha" moments when a confusing unit finally clicks.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Hearing classmates ask the same questions they were afraid to say out loud.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Practicing with real test-style problems, not random worksheets.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Light accountability: they show up because others are waiting on them.</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="card-header">
+                        <h3>What we strip away on purpose</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> Background chatter, constant movement, and sensory overload.</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> Being rushed through content just to "cover" the chapter.</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> Being put on the spot in front of thirty peers.</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> The feeling that asking one more question will derail the whole class.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A WEEK INSIDE A COHORT -->
+    <section class="section" id="cohort-week">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">Weekly rhythm</span>
+                <h2>What one Cohort week actually looks like.</h2>
+                <p>
+                    Every lab runs on a predictable rhythm so students know what is coming: check in, clarify, practice,
+                    and plan. Same flow each time, adapted to what their teacher has on deck.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="service-card basic reveal">
+                    <div class="card-header">
+                        <h3>Beginning of session</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-clipboard-text"></i> Quick round of what is due, what units feel shaky, and what tests are coming.</li>
+                        <li><i class="ph-fill ph-target"></i> We decide as a group what needs attention most so the time actually moves the needle.</li>
+                        <li><i class="ph-fill ph-lightbulb"></i> Short reteach of the stickiest concept using examples that match how this group learns.</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="card-header">
+                        <h3>Middle &amp; wrap-up</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-pencil-line"></i> Guided practice on real problems&mdash;students talk through steps and compare approaches.</li>
+                        <li><i class="ph-fill ph-books"></i> Quiet work time so concepts can settle while help is still in the room.</li>
+                        <li><i class="ph-fill ph-signpost"></i> Clear next steps for the week: what to review, what to try differently, and what to bring back.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIT SECTION -->
+    <section class="section" id="fit">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">Fit matters</span>
+                <h2>When Cohort shines&mdash;and when to start elsewhere.</h2>
+                <p>
+                    Cohort sits between one-on-one support and full coaching. It is best when the group is aligned and the main
+                    barrier is pace, pressure, or overwhelm&mdash;not total confusion across the board.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="service-card basic reveal">
+                    <div class="card-header">
+                        <h3>Cohort is a strong fit if&hellip;</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-check-circle"></i> Students share the same course (or very close) and similar goals.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> They want support but still prefer learning alongside a few peers.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> They can handle a small, calm group without shutting down.</li>
+                        <li><i class="ph-fill ph-check-circle"></i> You want help staying on top of one specific class, not a full life overhaul.</li>
+                    </ul>
+                </div>
+                <div class="service-card highlight reveal">
+                    <div class="card-header">
+                        <h3>Another tier might be better if&hellip;</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> Your student is significantly ahead or behind the rest of the group.</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> They completely freeze or shut down in front of any peers.</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> You need deep, ongoing support around systems, stress, and family rhythm (usually Elite).</li>
+                        <li><i class="ph-fill ph-x-circle" style="color:#999;"></i> Schedules change weekly and you cannot reasonably protect a group time.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUTS & BOLTS -->
+    <section class="section" id="details">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">Nuts &amp; bolts</span>
+                <h2>Structure, logistics, and what families can expect.</h2>
+                <p>
+                    Cohort is designed to be straightforward to start and sustainable to keep. You bring a small group from
+                    the same class; we bring structure, clarity, and calm.
+                </p>
+            </div>
+
+            <div class="decision-grid">
+                <div class="service-card basic reveal">
+                    <div class="card-header">
+                        <h3>Structure at a glance</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-users-three"></i> Group size: usually 3&ndash;5 students, capped to keep things focused.</li>
+                        <li><i class="ph-fill ph-timer"></i> Session length: ~60 minutes once per week.</li>
+                        <li><i class="ph-fill ph-monitor"></i> Format: live online; local in-person options case-by-case.</li>
+                        <li><i class="ph-fill ph-flask"></i> Subjects: middle school through AP math and science.</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="card-header">
+                        <h3>Enrollment &amp; investment</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i class="ph-fill ph-clipboard-text"></i> One parent reaches out as coordinator; we handle the rest of the onboarding.</li>
+                        <li><i class="ph-fill ph-swap"></i> Pricing typically sits between one-on-one and Elite, with the hourly rate shared across families.</li>
+                        <li><i class="ph-fill ph-info"></i> Specific rates vary by season and schedule; we walk through current options in your Insight Session.</li>
+                        <li><i class="ph-fill ph-handshake"></i> If we realize Cohort is not the right tier, we will say so and point you to a better fit.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-intro reveal">
+                <span class="kicker">Next step</span>
+                <h2>Want to explore a Cohort for their class?</h2>
+                <p>
+                    If you are picturing a few classmates learning together in a calmer room, the next step is simple:
+                    book a complimentary Insight Session. We will map out your student&apos;s situation, talk through
+                    possible cohorts, and help you decide if this is the right tier.
+                </p>
+            </div>
+            <div class="btn-row" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                <a href="/insight-session" class="btn btn-primary">Book Insight Session</a>
+                <a href="/services.html" class="btn btn-secondary">Compare Cohort with other services</a>
+            </div>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4 style="text-align: left;">Clarity Academics</h4>
-                    <p style="text-align: left;">Lexington, KY<br>Online Worldwide</p>
+                    <h4>Clarity Academics</h4>
+                    <p>Lexington, KY<br>Online Worldwide</p>
                 </div>
                 <div class="footer-col">
-                    <h4 style="text-align: left;">Programs</h4>
-                    <a href="/elite.html" style="text-align: left;">Elite</a>
-                    <a href="/core.html" style="text-align: left;">Core</a>
-                    <a href="/cohort.html" style="text-align: left;">Cohort</a>
+                    <h4>Programs</h4>
+                    <a href="/elite.html">Elite</a>
+                    <a href="/core.html">Core</a>
+                    <a href="/cohort.html">Cohort</a>
                 </div>
                 <div class="footer-col">
-                    <h4 style="text-align: left;">Legal</h4>
-                    <a href="/privacy-policy.html" style="text-align: left;">Privacy Policy</a>
-                    <a href="/terms-of-service.html" style="text-align: left;">Terms of Service</a>
+                    <h4>Legal</h4>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
                 </div>
                 <div class="footer-col">
-                    <h4 style="text-align: left;">Contact</h4>
-                    <a href="mailto:clarityacademics@gmail.com" style="text-align: left;">clarityacademics@gmail.com</a>
+                    <h4>Contact</h4>
+                    <a href="mailto:clarityacademics@gmail.com">clarityacademics@gmail.com</a>
                 </div>
             </div>
 
@@ -332,34 +761,11 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPTS -->
+    <!-- SCRIPTS -->
     <script>
-        /************************************************************************
-         * Core Site Logic (Nav, Mobile Menu, Reveals, Tilt)
-         ************************************************************************/
-
-        // Auto-update year in footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // --- AUTOMATIC ACTIVE LINK HIGHLIGHT ---
-        function highlightActiveLink() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            navLinks.forEach(link => {
-                // If the link path matches the current browser path (e.g. "/mission.html")
-                // it adds the 'active' class which triggers the underline style.
-                if (link.pathname === currentPath && link.getAttribute('href') !== '#') {
-                    link.classList.add('active');
-                }
-            });
-        }
-        highlightActiveLink();
-
-        const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Mobile menu toggle + focus management
         let _previousBodyOverflow = '';
 
-        // --- MOBILE MENU TOGGLE ---
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const hamburger = document.getElementById('hamburger');
@@ -372,138 +778,64 @@
 
             if (isActive) {
                 _previousBodyOverflow = document.body.style.overflow || '';
-                document.body.style.overflow = 'hidden'; // Lock scroll
+                document.body.style.overflow = 'hidden';
                 document.body.classList.add('menu-open');
+
                 const firstLink = menu.querySelector('a');
                 if (firstLink) firstLink.focus();
             } else {
                 document.body.style.overflow = _previousBodyOverflow;
                 document.body.classList.remove('menu-open');
-                document.getElementById('hamburger').focus();
+                hamburger.focus();
             }
         }
 
-        // Close menu on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
+        // Close mobile menu on ESC
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
                 const menu = document.getElementById('mobileMenu');
-                if (menu.classList.contains('active')) toggleMenu();
+                if (menu && menu.classList.contains('active')) {
+                    toggleMenu();
+                }
             }
         });
 
-        // --- SCROLL REVEAL ANIMATIONS ---
-        (function setupReveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            
-            if ('IntersectionObserver' in window) {
-                const obsOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
-                const io = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, obsOptions);
-                reveals.forEach(r => io.observe(r));
-            } else {
-                // Fallback for older browsers
-                const revealOnScroll = () => {
-                    const windowHeight = window.innerHeight;
-                    reveals.forEach((reveal) => {
-                        const elementTop = reveal.getBoundingClientRect().top;
-                        if (elementTop < windowHeight - 50) {
-                            reveal.classList.add('active');
-                        }
-                    });
-                };
-                window.addEventListener('scroll', revealOnScroll);
-                revealOnScroll(); // Trigger once on load
-            }
-        })();
+        // Reveal-on-scroll
+        const revealElements = document.querySelectorAll('.reveal');
 
-        // --- NAVBAR SCROLL EFFECT (Transparency to Solid) ---
-        const nav = document.getElementById('navbar');
-        let lastScrollY = 0;
-        const onScroll = () => {
-            lastScrollY = window.scrollY;
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        };
-        window.addEventListener('scroll', () => requestAnimationFrame(onScroll));
-        onScroll();
+        function handleReveal() {
+            const windowHeight = window.innerHeight;
+            const offset = 70;
 
-        // --- TILT EFFECT (For Cards if you add them) ---
-        function setupTilt() {
-            if (window.innerWidth > 960) {
-                const tiltCards = document.querySelectorAll('.tilt-card');
-                tiltCards.forEach(card => {
-                    card.onmousemove = null;
-                    card.onmouseleave = null;
-
-                    card.addEventListener('mousemove', (e) => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -10;
-                        const rotateY = ((x - centerX) / centerX) * 10;
-                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    });
-
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
-                    });
-                });
-            }
-        }
-        setupTilt();
-        
-        // Debounce helper
-        function debounce(fn, wait = 150) {
-            let t = null;
-            return (...args) => {
-                clearTimeout(t);
-                t = setTimeout(() => fn(...args), wait);
-            };
-        }
-        window.addEventListener('resize', debounce(setupTilt, 200));
-
-        // --- PAGE VISIBILITY LOGIC (For Animations) ---
-        function handleVisibilityChange() {
-            if (document.hidden) {
-                document.body.classList.add('page-inactive');
-            } else {
-                document.body.classList.remove('page-inactive');
-            }
-        }
-        document.addEventListener('visibilitychange', handleVisibilityChange, false);
-
-        // --- NAV PADDING SYNC ---
-        // Prevents content from being hidden behind the fixed navbar
-        (function syncBodyPaddingWithNav() {
-            const navbar = document.getElementById('navbar');
-            if (!navbar) return;
-
-            function updateBodyPadding() {
-                const height = Math.ceil(navbar.getBoundingClientRect().height);
-                // We add a slight buffer if needed, or just set it exactly
-                if (document.body.style.paddingTop !== height + 'px') {
-                    document.body.style.paddingTop = height + 'px';
+            revealElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - offset) {
+                    el.classList.add('active');
                 }
-            }
+            });
+        }
 
-            if ('ResizeObserver' in window) {
-                const ro = new ResizeObserver(() => updateBodyPadding());
-                ro.observe(navbar);
+        window.addEventListener('scroll', handleReveal);
+        window.addEventListener('load', handleReveal);
+
+        // Nav scroll state
+        const navbar = document.getElementById('navbar');
+        function handleNavScroll() {
+            if (!navbar) return;
+            if (window.scrollY > 12) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-            window.addEventListener('resize', debounce(updateBodyPadding, 80));
-            updateBodyPadding(); // Run immediately
-        })();
+        }
+        window.addEventListener('scroll', handleNavScroll);
+        window.addEventListener('load', handleNavScroll);
+
+        // Footer year
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
     </script>
 </body>
 </html>
