@@ -1236,9 +1236,16 @@
         }
         adjustHeroForViewport();
         window.addEventListener('resize', debounce(adjustHeroForViewport, 120));
+
+         // footer year
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
     </script>
 </body>
 </html>
+
 
 
 
