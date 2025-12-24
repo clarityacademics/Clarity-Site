@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Clarity Academics | Mission, Vision & Values</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | Clarity Academics</title>
 
     <!-- BRAND FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,8 +14,8 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        /* --- BRAND TOKENS (MATCH HOMEPAGE + MISSION) --- */
         :root {
-            /* Colors */
             --dusty-indigo: #3A5167;
             --dark-indigo: #2E4252;
             --moss-green: #8A9A5B;
@@ -27,42 +27,39 @@
             --dark-clay: #8F533F;
             --white: #ffffff;
 
-            /* Fonts */
-            --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
-            --font-sans: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
 
-            /* Spacing */
-            --section-padding: 8rem 2rem;
+            --section-padding: 6rem 2rem;
             --container-width: 1200px;
         }
 
-        * {
+        /* --- RESET --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
+            font-family: var(--font-sans);
             background-color: var(--oat-cream);
             color: var(--dusty-indigo);
-            font-family: var(--font-sans);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; 
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        body.page-inactive * {
-            animation-play-state: paused !important;
-            transition: none !important;
-        }
-
-        h1, h2, h3, h4 {
+        h1, h2, h3, h4, h5 {
             font-family: var(--font-serif);
             line-height: 1.2;
+            color: var(--dark-indigo);
         }
 
         p {
@@ -70,31 +67,65 @@
             color: var(--dusty-indigo);
         }
 
-        /* TEXTURE */
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9000;
-            opacity: 0.04;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJneiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIxIi8+PC9zdmc+');
-        }
-
         .container {
             max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 1.5rem;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
-        /* BUTTONS – MATCH HOMEPAGE */
+        /* --- TEXTURE OVERLAY --- */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.04;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJueiI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbnoiKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==');
+        }
+
+        /* --- UTILS --- */
+        .section {
+            padding: var(--section-padding);
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-intro span.kicker {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rust-clay);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-intro h2 {
+            font-size: clamp(2.3rem, 3.5vw, 2.8rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-intro p {
+            max-width: 620px;
+            margin: 0 auto;
+            font-size: 0.98rem;
+            color: var(--dark-indigo);
+            opacity: 0.9;
+        }
+
+        /* --- BUTTONS --- */
         .btn-wrapper {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
         }
 
         .btn {
@@ -102,41 +133,41 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.1rem 3rem;
-            border-radius: 50px;
+            padding: 1rem 2.8rem;
+            border-radius: 999px;
+            border: none;
             text-decoration: none;
-            font-weight: 600;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: all 0.3s ease;
+            font-weight: 600;
             cursor: pointer;
-            border: none;
             overflow: hidden;
-            z-index: 1;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+            white-space: nowrap;
         }
 
         .btn-primary {
-            background-color: var(--rust-clay);
+            background: var(--rust-clay);
             color: var(--white);
-            box-shadow: 0 10px 30px rgba(178, 106, 79, 0.3);
+            box-shadow: 0 12px 30px rgba(178, 106, 79, 0.35);
         }
 
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
             transform: translateX(-100%);
-            transition: transform 0.6s;
+            transition: transform 0.55s ease;
+            pointer-events: none;
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(178, 106, 79, 0.5);
-            background-color: var(--dark-clay);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(178, 106, 79, 0.45);
+            background: var(--dark-clay);
         }
 
         .btn-primary:hover::before {
@@ -144,31 +175,37 @@
         }
 
         .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--dusty-indigo);
+            border: 1.5px solid var(--dusty-indigo);
+            background: transparent;
             color: var(--dusty-indigo);
+            box-shadow: 0 10px 24px rgba(58, 81, 103, 0.08);
         }
 
         .btn-secondary:hover {
-            background-color: var(--dusty-indigo);
+            background: var(--dusty-indigo);
             color: var(--white);
         }
 
-        .btn:focus {
-            outline: 3px solid rgba(178,106,79,0.2);
-            outline-offset: 3px;
+        .btn-ghost {
+            background: transparent;
+            color: var(--dusty-indigo);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            padding-inline: 0;
         }
 
-        /* NAV – MATCH HOMEPAGE */
+        .btn-ghost:hover {
+            color: var(--rust-clay);
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* --- NAVIGATION (MATCH HOMEPAGE / MISSION) --- */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
             background: rgba(239, 233, 225, 0.85);
             backdrop-filter: blur(15px);
@@ -204,8 +241,8 @@
             font-size: 1.4rem;
             line-height: 1;
             color: var(--dusty-indigo);
-            font-weight: 700;
             letter-spacing: -0.02em;
+            font-weight: 700;
         }
 
         .brand-text span {
@@ -250,31 +287,30 @@
             width: 100%;
         }
 
-        /* MOBILE NAV */
         .hamburger {
             display: none;
-            cursor: pointer;
-            z-index: 1002;
             flex-direction: column;
             gap: 6px;
             background: transparent;
             border: none;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: auto;
         }
 
-        .bar {
+        .hamburger .bar {
             width: 30px;
             height: 3px;
-            background-color: var(--dusty-indigo);
-            transition: 0.3s;
-            border-radius: 3px;
+            border-radius: 999px;
+            background: var(--dusty-indigo);
+            transition: transform 0.25s ease, opacity 0.25s ease;
         }
+
+        
 
         .mobile-menu {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
+            inset: 0;
             background: var(--oat-cream);
             display: flex;
             flex-direction: column;
@@ -282,12 +318,16 @@
             justify-content: center;
             gap: 2rem;
             transform: translateY(-100%);
-            transition: 0.5s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s ease, opacity 0.35s ease;
             z-index: 999;
         }
 
         .mobile-menu.active {
             transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .mobile-menu a {
@@ -297,383 +337,365 @@
             text-decoration: none;
         }
 
-        /* SECTION UTILITIES */
-        .section-tag {
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--moss-green);
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: block;
+        .mobile-menu a:hover {
+            color: var(--rich-sand);
         }
 
-        section.section {
+        /* --- SERVICES HERO --- */
+        .services-hero {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(221, 190, 155, 0.3), transparent 60%);
+            position: relative;
+        }
+
+        .services-hero .sub-tag {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--rust-clay);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .services-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4.3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .services-hero p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.08rem;
+            color: var(--dark-indigo);
+            opacity: 0.95;
+        }
+
+        /* --- COMPARISON / PLANS SECTION --- */
+        .comparison-section {
             padding: var(--section-padding);
         }
 
-        .section-intro {
-            max-width: 42rem;
-            font-size: 1.02rem;
-            line-height: 1.8;
-            margin-top: 0.8rem;
-        }
-
-        /* HERO */
-        .page-hero {
-            padding: 7rem 2rem 4rem;
-        }
-
-        .page-hero-inner {
-            max-width: var(--container-width);
-            margin: 0 auto;
+        .decision-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+            grid-template-columns: 1fr 1.05fr;
             gap: 3rem;
-            align-items: center;
+            align-items: stretch;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .page-kicker {
+        .service-card {
+            position: relative;
+            background: #ffffff;
+            padding: 2.7rem 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card.basic {
+            opacity: 0.9;
+            transform: scale(0.97);
+        }
+
+        .service-card.basic:hover {
+            transform: scale(0.99) translateY(-4px);
+            box-shadow: 0 18px 46px rgba(0,0,0,0.05);
+            opacity: 1;
+        }
+
+        .service-card.highlight {
+            border: 2px solid var(--rich-sand);
+            background: linear-gradient(180deg, #ffffff 0%, #fffbf5 100%);
+            box-shadow: 0 22px 60px rgba(58, 81, 103, 0.15);
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .service-card.highlight:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 70px rgba(58, 81, 103, 0.2);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--rust-clay);
+            color: var(--white);
+            padding: 0.5rem 1.6rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.22em;
-            font-size: 0.76rem;
-            color: var(--moss-green);
-            font-weight: 600;
-            margin-bottom: 0.9rem;
+            letter-spacing: 0.16em;
         }
 
-        .page-title {
-            font-size: 2.6rem;
+        .card-header {
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            padding-bottom: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .service-price {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--dusty-indigo);
+            font-weight: 700;
+        }
+
+        .service-price span {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--moss-green);
+            margin-left: 0.4rem;
+        }
+
+        .benefit-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--dark-indigo);
+        }
+
+        .benefit-list i {
+            font-size: 1.2rem;
+            color: var(--moss-green);
+        }
+
+        .benefit-list li.dim {
+            opacity: 0.55;
+            text-decoration: line-through;
+        }
+
+        /* --- ELITE SECTION --- */
+        .elite-section {
+            margin: 4rem 2rem 0;
+            border-radius: 30px;
+            background-color: var(--dusty-indigo);
+            color: var(--oat-cream);
+            padding: 4.5rem 2rem 4rem;
+        }
+
+        .elite-section h2 {
+            font-size: clamp(2.4rem, 3.8vw, 3rem);
+            color: var(--rich-sand);
+            text-align: center;
             margin-bottom: 1rem;
         }
 
-        .page-title span {
-            display: block;
-            color: var(--rust-clay);
-        }
-
-        .page-hero-text p {
-            max-width: 34rem;
+        .elite-section > p {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
             font-size: 1.02rem;
+            opacity: 0.9;
         }
 
-        .hero-meta {
+        .elite-grid {
             display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
-        .hero-meta-card {
-            background: rgba(255,255,255,0.96);
-            border-radius: 20px;
-            padding: 1.6rem 1.5rem;
-            border: 1px solid rgba(58,81,103,0.12);
-            box-shadow: 0 16px 45px rgba(0,0,0,0.08);
+        .elite-item {
+            max-width: 320px;
         }
 
-        .hero-meta-card .meta-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            color: var(--moss-green);
-            margin-bottom: 0.4rem;
-            font-weight: 600;
+        .elite-item i {
+            font-size: 2rem;
+            color: var(--rich-sand);
+            margin-bottom: 0.7rem;
+            display: block;
         }
 
-        .hero-meta-card h3 {
+        .elite-item h4 {
             font-size: 1.25rem;
             margin-bottom: 0.4rem;
+            color: var(--oat-cream);
         }
 
-        .hero-meta-card p {
+        .elite-item p {
             font-size: 0.95rem;
-            line-height: 1.7;
+            opacity: 0.82;
+            color: var(--oat-cream);
         }
 
-        .hero-meta-card small {
-            display: block;
-            margin-top: 0.45rem;
-            font-size: 0.8rem;
-            color: var(--dark-green);
+        .elite-section .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
         }
 
-        /* MISSION */
-        .mission-section {
-            background: #fff;
+        .elite-section .btn-primary {
+            background: var(--rich-sand);
+            color: var(--dark-indigo);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35);
         }
 
-        .mission-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-            gap: 3rem;
-            align-items: flex-start;
-            max-width: var(--container-width);
+        .elite-section .btn-primary:hover {
+            background: #e4c6a4;
+        }
+
+        /* --- SUBJECT TAGS --- */
+        .subjects {
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .subjects h3 {
+            color: var(--moss-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .subject-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.9rem;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .mission-body p + p {
-            margin-top: 1rem;
-        }
-
-        .mission-body strong {
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.6rem;
+            border-radius: 999px;
+            background: #ffffff;
+            border: 1px solid var(--rich-sand);
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--dusty-indigo);
         }
 
-        .mission-card {
-            background: var(--light-sand);
-            border-radius: 20px;
-            padding: 1.8rem 1.75rem 1.7rem;
-            border: 1px solid rgba(58,81,103,0.12);
-            box-shadow: 0 14px 40px rgba(58,81,103,0.08);
-        }
-
-        .mission-card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 0.7rem;
-        }
-
-        .mission-card p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        .bullet-points {
-            list-style: none;
-            padding: 0;
-            margin-top: 1.25rem;
-        }
-
-        .bullet-points li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            font-size: 0.95rem;
-            margin-bottom: 0.7rem;
-            color: var(--dark-indigo);
-        }
-
-        .bullet-points i {
-            color: var(--rust-clay);
-            font-size: 1.1rem;
-            margin-top: 0.15rem;
-        }
-
-        .mission-image {
-            margin-top: 1.4rem;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid rgba(58,81,103,0.15);
-        }
-
-        .mission-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        /* VISION */
-        .vision-section {
-            background: var(--rich-sand);
-        }
-
-        .vision-inner {
-            background: rgba(255,255,255,0.96);
-            border-radius: 28px;
-            padding: 2.5rem 2.25rem;
-            box-shadow: 0 20px 60px rgba(58,81,103,0.18);
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-            gap: 2.5rem;
-            align-items: center;
-            max-width: var(--container-width);
-            margin: 0 auto;
-        }
-
-        .vision-title {
-            font-size: 2.1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .vision-tagline {
-            font-family: var(--font-serif);
-            font-style: italic;
-            color: var(--rust-clay);
-            font-size: 1.1rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
-
-        .vision-text p + p {
-            margin-top: 1rem;
-        }
-
-        .vision-image {
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(58,81,103,0.12);
-        }
-
-        .vision-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        /* VALUES */
-        .values-section {
-            background: var(--oat-cream);
-        }
-
-        .values-header {
-            text-align: center;
-            max-width: 42rem;
-            margin: 0 auto 3rem;
-        }
-
-        .values-header p {
-            margin-top: 0.75rem;
-        }
-
-        .values-grid {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2rem;
-        }
-
-        .value-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 1.75rem 1.6rem 1.6rem;
-            border: 1px solid rgba(58,81,103,0.08);
-            box-shadow: 0 14px 40px rgba(58,81,103,0.06);
-            display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-            height: 100%;
-        }
-
-        .value-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            background: var(--light-sand);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--rust-clay);
-            margin-bottom: 0.4rem;
-        }
-
-        .value-icon i {
-            font-size: 1.4rem;
-        }
-
-        .value-card h3 {
-            font-size: 1.15rem;
-        }
-
-        .value-card p {
-            font-size: 0.94rem;
-            line-height: 1.7;
-        }
-
-        /* SLIM SECTIONS */
-        .slim-section {
-            padding: 3.5rem 2rem;
-            background: #fff;
-        }
-
-        .slim-section:nth-of-type(even) {
-            background: var(--oat-cream);
-        }
-
-        .slim-inner {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.75rem;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .slim-inner p {
-            max-width: 36rem;
-            font-size: 0.98rem;
-        }
-
-        /* CTA */
+        /* --- CTA SECTION (CONTACT) --- */
         .cta-section {
-            padding: 5rem 2rem;
-            background: var(--dark-indigo);
-            color: var(--oat-cream);
+            padding: 5rem 2rem 5rem;
             text-align: center;
+            background: radial-gradient(circle at top, rgba(221,190,155,0.25), transparent 65%);
         }
 
         .cta-section h2 {
-            font-size: 2.6rem;
-            color: var(--oat-cream);
+            font-size: clamp(2.3rem, 3.4vw, 2.8rem);
             margin-bottom: 1rem;
         }
 
         .cta-section p {
-            max-width: 34rem;
+            max-width: 620px;
             margin: 0 auto 2.5rem;
-            color: rgba(255,255,255,0.9);
-            font-size: 1.05rem;
+            font-size: 1.02rem;
+            opacity: 0.92;
         }
 
-        .cta-section .btn-primary {
-            background-color: var(--oat-cream);
+        /* --- ABOUT + MISSION TEASERS (for #mission and #about anchors) --- */
+        .anchor-teaser {
+            padding: 4rem 2rem 1rem;
+        }
+
+        .anchor-teaser-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.03);
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .anchor-teaser h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .anchor-teaser p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .anchor-teaser .kicker {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            font-weight: 600;
             color: var(--rust-clay);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            margin-bottom: 0.4rem;
         }
 
-        .cta-section .btn-primary:hover {
-            background-color: #fff;
+        .anchor-teaser .btn-wrapper {
+            justify-content: flex-end;
         }
 
-        /* FOOTER */
+        .anchor-teaser .btn-secondary {
+            padding-inline: 2.2rem;
+        }
+
+        /* --- FOOTER (MATCH HOMEPAGE / MISSION) --- */
         footer {
             background-color: var(--dusty-indigo);
             color: var(--oat-cream);
-            padding: 4rem 2rem 2rem;
+            padding: 4.5rem 2rem 2rem;
+            margin-top: 1rem;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 3rem;
-            max-width: var(--container-width);
+            max-width: 1200px;
             margin: 0 auto;
             padding-bottom: 2.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
 
         .footer-col h4 {
-            color: var(--rich-sand);
+            font-size: 1.1rem;
             margin-bottom: 1.2rem;
-            font-size: 1.05rem;
+            color: var(--rich-sand);
+            font-weight: 700;
         }
 
         .footer-col p {
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.78);
+            color: rgba(255,255,255,0.75);
         }
 
         .footer-col a {
-            color: rgba(255,255,255,0.7);
+            display: block;
             text-decoration: none;
             font-size: 0.9rem;
-            display: block;
-            margin-bottom: 0.6rem;
-            transition: 0.25s ease;
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 0.7rem;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
 
         .footer-col a:hover {
@@ -683,17 +705,26 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 1.75rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
             color: rgba(255,255,255,0.45);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 960px) {
-            nav {
-                padding-inline: 1.5rem;
-            }
+        /* --- REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
 
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 960px) {
             .nav-links {
                 display: none;
             }
@@ -702,66 +733,67 @@
                 display: flex;
             }
 
-            .page-hero {
-                padding: 6rem 1.5rem 3.5rem;
+            .services-hero {
+                padding-top: 7rem;
+                padding-bottom: 4rem;
             }
 
-            .page-hero-inner {
-                grid-template-columns: minmax(0, 1fr);
-                gap: 2.5rem;
+            .decision-grid {
+                grid-template-columns: 1fr;
             }
 
-            .hero-meta {
-                flex-direction: row;
-                flex-wrap: wrap;
+            .service-card.basic {
+                transform: scale(1);
+                order: 2;
             }
 
-            .hero-meta-card {
-                flex: 1 1 220px;
+            .service-card.highlight {
+                order: 1;
             }
 
-            section.section {
-                padding: 4.5rem 1.5rem;
+            .elite-section {
+                margin: 3rem 0 0;
+                border-radius: 0;
             }
 
-            .mission-grid,
-            .vision-inner {
-                grid-template-columns: minmax(0, 1fr);
+            .elite-grid {
+                flex-direction: column;
+                align-items: stretch;
             }
 
-            .vision-inner {
-                padding-inline: 1.6rem;
+            .anchor-teaser-inner {
+                grid-template-columns: 1fr;
+                text-align: left;
             }
 
-            .slim-section {
-                padding-inline: 1.5rem;
+            .anchor-teaser .btn-wrapper {
+                justify-content: flex-start;
             }
         }
 
         @media (max-width: 640px) {
-            .page-title {
-                font-size: 2.1rem;
+            nav, nav.scrolled {
+                padding-inline: 1.25rem;
             }
 
-            .page-hero-text p {
-                font-size: 0.98rem;
+            .services-hero h1 {
+                font-size: 2.4rem;
             }
 
-            .hero-meta {
-                flex-direction: column;
+            .services-hero p {
+                font-size: 1rem;
             }
 
-            .slim-inner {
-                flex-direction: column;
-                align-items: flex-start;
+            .section, .comparison-section, .subjects, .cta-section {
+                padding-inline: 1.5rem;
             }
 
-            .cta-section h2 {
-                font-size: 2.2rem;
+            .elite-section {
+                padding-inline: 1.5rem;
             }
 
-            .cta-section p {
-                font-size: 0.98rem;
+            .anchor-teaser-inner {
+                padding-inline: 1.75rem;
             }
         }
     </style>
@@ -769,323 +801,208 @@
 <body>
     <div class="noise" aria-hidden="true"></div>
 
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU OVERLAY -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <a href="/mission.html" onclick="toggleMenu()">Mission</a>
         <a href="/services.html" onclick="toggleMenu()">Services</a>
         <a href="/about.html" onclick="toggleMenu()">About</a>
         <div class="btn-wrapper" style="margin-top: 1rem;">
-            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary" style="color: var(--oat-cream);">
-                Book Session
-            </a>
+            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary" style="color: var(--oat-cream);">Book Session</a>
         </div>
     </div>
 
-    <!-- NAV (same structure & styles as homepage) -->
+    <!-- NAV (fixed to top) -->
     <nav id="navbar">
         <a href="/index.html" class="brand-lockup">
-            <img src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg"
-                 alt="Clarity Academics Logo"
-                 class="logo-svg">
+            <img src="https://static.wixstatic.com/shapes/d5cd96_17f787d101e14d609ad7946ecd85bbe4.svg" alt="Clarity Academics Logo" class="logo-svg">
             <div class="brand-text">
                 <h4>Clarity Academics</h4>
                 <span>Clarity. Confidence. Calling.</span>
             </div>
         </a>
-
         <div class="nav-links">
             <a href="/mission.html">Mission</a>
             <a href="/services.html">Services</a>
             <a href="/about.html">About</a>
             <div class="btn-wrapper">
-                <a href="#contact"
-                   class="btn btn-primary"
-                   style="padding: 0.8rem 1.8rem; font-size: 0.8rem; color: var(--oat-cream);">
-                    Book Insight Session
-                </a>
+                <a href="#contact" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.8rem; color: var(--oat-cream);">Book Insight Session</a>
             </div>
         </div>
-
-        <button class="hamburger"
-                id="hamburger"
-                aria-label="Toggle menu"
-                aria-controls="mobileMenu"
-                aria-expanded="false"
-                onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </button>
     </nav>
 
     <!-- HERO -->
-    <header id="hero" class="page-hero">
-        <div class="page-hero-inner container">
-            <div class="page-hero-text">
-                <div class="page-kicker">Mission • Vision • Values</div>
-                <h1 class="page-title">
-                    Grades are the beginning.<span>Formation is the goal.</span>
-                </h1>
-                <p>
-                    Clarity Academics exists to serve the whole student—mind, body, and spirit—
-                    so families can pursue academic excellence without sacrificing peace, purpose,
-                    or wellbeing. This page is the heartbeat behind everything we do.
-                </p>
-            </div>
-
-            <div class="hero-meta" aria-label="Mission & vision overview">
-                <div class="hero-meta-card">
-                    <div class="meta-label">Mission</div>
-                    <h3>Whole-student, evidence-backed learning.</h3>
-                    <p>
-                        Grades matter, but we put the person first—using individualized,
-                        research-based methods that actually work for each learner.
-                    </p>
-                </div>
-                <div class="hero-meta-card">
-                    <div class="meta-label">Vision</div>
-                    <h3>Clarity. Confidence. Calling.</h3>
-                    <p>
-                        A world where science and faith walk together in harmony, and every
-                        student grows holistically—without burning out.
-                    </p>
-                    <small>Grounded in both neuroscience and Christian conviction.</small>
-                </div>
-            </div>
+    <header id="hero" class="services-hero">
+        <div class="container">
+            <span class="sub-tag reveal">Philosophy</span>
+            <h1 class="reveal" style="transition-delay: 0.06s;">Consistency Creates Confidence.</h1>
+            <p class="reveal" style="transition-delay: 0.12s;">
+                Single sessions put out fires. Consistent rhythm rewires how your student thinks, plans, and shows up in class.
+                Choose the level of support that fits your family's season.
+            </p>
         </div>
     </header>
 
-    <!-- MISSION -->
-    <section id="mission" class="section mission-section">
-        <div class="mission-grid">
-            <div class="mission-body">
-                <span class="section-tag">Our Mission</span>
-                <h2>Why Clarity Academics Exists</h2>
-                <p class="section-intro">
-                    Students are more than their report cards. Behind every grade is a real
-                    person with fears, gifts, questions, and a story God is writing in real time.
-                </p>
-                <p>
-                    Our mission is simple and demanding:
-                    <strong>Grades are important, but we put the whole student first—mind, body,
-                    and spirit—delivering only individualized, evidence-backed methods that work,
-                    and empowering learners with clarity, confidence, and purpose.</strong>
-                </p>
-                <p>
-                    That means we refuse one-size-fits-all tutoring. Every plan is built around
-                    the nervous system, the home environment, and the student’s God-given wiring—
-                    not just the next test date.
-                </p>
-                <ul class="bullet-points">
-                    <li>
-                        <i class="ph ph-heartbeat" aria-hidden="true"></i>
-                        <span>We protect mental health and nervous-system safety while we push for mastery and rigor.</span>
-                    </li>
-                    <li>
-                        <i class="ph ph-seal-check" aria-hidden="true"></i>
-                        <span>We use clear, evidence-backed strategies so students know why a tool works—not just that it does.</span>
-                    </li>
-                    <li>
-                        <i class="ph ph-hands-praying" aria-hidden="true"></i>
-                        <span>We honor each family’s convictions and keep faith–science alignment on the table, not off-limits.</span>
-                    </li>
-                </ul>
-            </div>
-
-            <aside class="mission-card">
-                <h3>What This Looks Like Week-to-Week</h3>
-                <p>
-                    In practice, our mission shows up as calm, structured sessions that weave
-                    together content review, executive function coaching, and character formation.
-                </p>
-                <ul class="bullet-points">
-                    <li>
-                        <i class="ph ph-brain" aria-hidden="true"></i>
-                        <span>Hands-on problem solving instead of passive worksheets.</span>
-                    </li>
-                    <li>
-                        <i class="ph ph-calendar-check" aria-hidden="true"></i>
-                        <span>Simple, sustainable systems for planning, tracking, and follow-through.</span>
-                    </li>
-                    <li>
-                        <i class="ph ph-users-three" aria-hidden="true"></i>
-                        <span>Regular parent touchpoints so you’re never guessing what’s happening.</span>
-                    </li>
-                </ul>
-                <div class="mission-image" aria-hidden="true">
-                    <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                         alt="Calm, focused student working at a desk">
+    <!-- MISSION TEASER (for #mission anchor) -->
+    <section id="mission" class="anchor-teaser">
+        <div class="container">
+            <div class="anchor-teaser-inner reveal">
+                <div>
+                    <span class="kicker">Rooted in the Why</span>
+                    <h3>Every service is an extension of the mission.</h3>
+                    <p>
+                        Clarity exists to help neurodivergent and sensitive learners experience calm confidence in science and math.
+                        Our service structure is built around that promise — not the other way around.
+                    </p>
                 </div>
-            </aside>
-        </div>
-    </section>
-
-    <!-- VISION -->
-    <section class="section vision-section">
-        <div class="vision-inner">
-            <div class="vision-text">
-                <span class="section-tag">Our Vision</span>
-                <div class="vision-tagline">Clarity. Confidence. Calling.</div>
-                <h2 class="vision-title">The Future We’re Building Toward</h2>
-                <p>
-                    We envision families who no longer have to choose between ambitious academics
-                    and deep peace at home. School stress stops owning the dinner table. Children
-                    know how to work hard <em>without</em> tying their worth to their GPA.
-                </p>
-                <p>
-                    In that future, students can speak fluently about both physics and faith—
-                    without feeling like they’re betraying one to honor the other. They grow up
-                    able to discern truth, carry responsibility, and listen for God’s voice in the
-                    middle of real life.
-                </p>
-                <p>
-                    Clarity Academics is one small, intentional step toward that world—one student,
-                    one family, one lab at a time.
-                </p>
-            </div>
-
-            <div class="vision-image" aria-hidden="true">
-                <img src="https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                     alt="Family discussing school with calm and connection">
+                <div class="btn-wrapper">
+                    <a href="mission.html#mission" class="btn btn-secondary">Read Mission, Vision &amp; Values</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- VALUES -->
-    <section class="section values-section">
-        <div class="values-header">
-            <span class="section-tag">Core Values</span>
-            <h2>How We Make Decisions, Not Just Marketing Claims</h2>
-            <p>
-                These are the non-negotiables that shape curriculum choices, scheduling,
-                feedback, and the way we talk to your student when a quiz goes badly.
+    <!-- COMPARISON SECTION (MAIN SERVICES) -->
+    <section id="services" class="comparison-section">
+        <div class="container decision-grid">
+            <!-- Flex Session -->
+            <div class="service-card basic reveal" style="transition-delay: 0.16s;">
+                <div class="card-header">
+                    <h3>Flex Session</h3>
+                    <div class="service-price">$50<span>/hr</span></div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Best for test prep, homework emergencies, or trying Clarity for the first time.
+                    </p>
+                </div>
+                <ul class="benefit-list">
+                    <li><i class="ph-fill ph-check-circle"></i> Pay as you go</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Subject-specific help</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Zoom or in-person (when available)</li>
+                    <li class="dim"><i class="ph-fill ph-x-circle" style="color: #ccc;"></i> No guaranteed weekly slot</li>
+                    <li class="dim"><i class="ph-fill ph-x-circle" style="color: #ccc;"></i> No curated long-term plan</li>
+                </ul>
+                <div class="btn-wrapper" style="width: 100%;">
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%;">Book Single Session</a>
+                </div>
+            </div>
+
+            <!-- Builder Membership -->
+            <div class="service-card highlight reveal" style="transition-delay: 0.22s;">
+                <div class="card-badge">Recommended</div>
+                <div class="card-header">
+                    <h3>Builder Membership</h3>
+                    <div class="service-price">$360<span>/mo</span></div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        <strong>$45/session.</strong> Two sessions per week designed for mastery, rhythm, and executive function support.
+                    </p>
+                </div>
+                <ul class="benefit-list">
+                    <li><i class="ph-fill ph-star" style="color: var(--rust-clay);"></i> <strong>Save $40/mo</strong> vs single sessions</li>
+                    <li><i class="ph-fill ph-calendar-check"></i> Guaranteed weekly slot</li>
+                    <li><i class="ph-fill ph-arrows-clockwise"></i> Rollover credits when life happens</li>
+                    <li><i class="ph-fill ph-chart-line-up"></i> Weekly progress summaries to parents</li>
+                    <li><i class="ph-fill ph-brain"></i> Built-in study systems and test routines</li>
+                </ul>
+                <div class="btn-wrapper" style="width: 100%;">
+                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Start Membership</a>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="#contact" style="font-size: 0.85rem; color: var(--dusty-indigo); text-decoration: underline;">
+                        Ask about Starter &amp; Master plans
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ELITE SECTION -->
+    <section id="elite" class="elite-section">
+        <div class="container">
+            <h2 class="reveal">Clarity Elite</h2>
+            <p class="reveal" style="transition-delay: 0.08s;">
+                For students who need more than tutoring. Elite is a holistic blend of academic coaching, executive function training,
+                and advanced subject mastery for high-stakes seasons.
             </p>
-        </div>
 
-        <div class="values-grid">
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-lighthouse" aria-hidden="true"></i>
+            <div class="elite-grid">
+                <div class="elite-item reveal" style="transition-delay: 0.14s;">
+                    <i class="ph-fill ph-brain"></i>
+                    <h4>Executive Function</h4>
+                    <p>
+                        We teach systems, not just content: planning, prioritization, checklists, and “brain-saving” routines that
+                        students can actually stick with.
+                    </p>
                 </div>
-                <h3>Truth Over Trend</h3>
-                <p>
-                    We don’t chase the latest TikTok study hack. We lean on time-tested learning
-                    science and a Christian worldview that honors truth, not noise.
-                </p>
-            </article>
-
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-tree" aria-hidden="true"></i>
+                <div class="elite-item reveal" style="transition-delay: 0.2s;">
+                    <i class="ph-fill ph-atom"></i>
+                    <h4>AP &amp; Honors Deep Dive</h4>
+                    <p>
+                        Concept-level understanding plus test-taking strategy for AP Physics and upper-level math and science courses.
+                    </p>
                 </div>
-                <h3>Discipline as Discipleship</h3>
-                <p>
-                    Discipline isn’t punishment; it’s training. We help students build consistency,
-                    integrity, and ownership—not perfectionism.
-                </p>
-            </article>
-
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-sun" aria-hidden="true"></i>
+                <div class="elite-item reveal" style="transition-delay: 0.26s;">
+                    <i class="ph-fill ph-users-three"></i>
+                    <h4>Parent Strategy Calls</h4>
+                    <p>
+                        Monthly parent calls to align on expectations, reduce homework battles, and build a calmer home study rhythm.
+                    </p>
                 </div>
-                <h3>Clarity Is Kindness</h3>
-                <p>
-                    Confusion breeds anxiety. We slow things down, name what’s going on,
-                    and give students clear, doable next steps.
-                </p>
-            </article>
-
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-heart" aria-hidden="true"></i>
-                </div>
-                <h3>Whole-Student Care</h3>
-                <p>
-                    Sleep, sensory load, hormones, and mental health matter. We adjust pace and
-                    expectations to protect the student, not just the syllabus.
-                </p>
-            </article>
-
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-ear-slash" aria-hidden="true"></i>
-                </div>
-                <h3>Low-Stimulus, High-Structure</h3>
-                <p>
-                    Calm environments and predictable routines give anxious or neurodivergent
-                    brains room to learn deeply without constant fight-or-flight.
-                </p>
-            </article>
-
-            <article class="value-card">
-                <div class="value-icon">
-                    <i class="ph ph-hands-clapping" aria-hidden="true"></i>
-                </div>
-                <h3>Close Parent Partnership</h3>
-                <p>
-                    You’re never an afterthought. We bring you into the process with honest updates,
-                    clear expectations, and a shared plan.
-                </p>
-            </article>
-        </div>
-    </section>
-
-    <!-- SERVICES CROSS-LINK -->
-    <section id="services" class="slim-section">
-        <div class="slim-inner">
-            <div>
-                <span class="section-tag">Programs Shaped by This Mission</span>
-                <h2 style="margin-bottom: 0.75rem;">How This Shows Up in Our Services</h2>
-                <p>
-                    Every offering is built from the same DNA: whole-student care, clear systems,
-                    and faith–science alignment. You can choose the level of intensity that fits
-                    your family’s season.
-                </p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                <div class="btn-wrapper">
-                    <a href="/elite.html" class="btn btn-secondary">Clarity Elite (Flagship Coaching)</a>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="/core.html" class="btn btn-secondary">Clarity Core (1:1 Tutoring)</a>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="/cohort.html" class="btn btn-secondary">Clarity Cohort (Small Groups)</a>
-                </div>
+
+            <div class="btn-wrapper" style="margin-top: 3rem;">
+                <a href="/elite.html" class="btn btn-primary">Apply for Elite Coaching ($100/hr)</a>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT CROSS-LINK -->
-    <section id="about" class="slim-section" style="background: var(--oat-cream);">
-        <div class="slim-inner">
-            <div>
-                <span class="section-tag">The Human Behind the Labs</span>
-                <h2 style="margin-bottom: 0.75rem;">Who Leads Clarity Academics</h2>
-                <p>
-                    Clarity was founded by Saugat, a science educator and researcher who loves both
-                    rigorous data and the local church. He’s walked with students who are burnt out,
-                    bored, or quietly questioning if faith and science can coexist.
-                </p>
+    <!-- SUBJECTS -->
+    <section class="subjects">
+        <div class="container">
+            <h3>We Cover</h3>
+            <div class="subject-tags reveal">
+                <span class="tag">Algebra I &amp; II</span>
+                <span class="tag">Geometry</span>
+                <span class="tag">Pre-Calculus</span>
+                <span class="tag">AP Physics</span>
+                <span class="tag">Chemistry</span>
+                <span class="tag">Biology</span>
+                <span class="tag">General Science</span>
             </div>
-            <div class="btn-wrapper">
-                <a href="/about.html" class="btn btn-secondary">Read the Founder Story</a>
+        </div>
+    </section>
+
+    <!-- ABOUT TEASER (for #about anchor) -->
+    <section id="about" class="anchor-teaser">
+        <div class="container">
+            <div class="anchor-teaser-inner reveal">
+                <div>
+                    <span class="kicker">The human behind the labs</span>
+                    <h3>Science tutoring that actually understands sensitive brains.</h3>
+                    <p>
+                        Clarity is led by Saugat — physics teacher who specializes in supporting neurodivergent and gifted learners. Students get rigor without the shame spiral.
+                    </p>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="about.html" class="btn btn-secondary">Read the Founder Story</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA / CONTACT -->
     <section id="contact" class="cta-section">
-        <div class="container" style="text-align: center;">
-            <h2>Ready to See This Mission in Action?</h2>
-            <p>
-                If this sounds like the kind of support your family has been looking for,
-                the next step is simple: book a complimentary Insight Session. We’ll listen,
-                map out goals, and help you decide whether Clarity is a fit.
+        <div class="container">
+            <h2 class="reveal">Ready for Clarity?</h2>
+            <p class="reveal" style="transition-delay: 0.08s;">
+                Join the early families who are seeing calmer homework nights and more confident test days.
+                Your first session comes with a 100% money-back guarantee.
             </p>
-            <div class="btn-wrapper">
-                <a href="/elite.html" class="btn btn-primary">
+            <div class="btn-wrapper reveal" style="transition-delay: 0.14s;">
+                <a href="https://www.clarityacademics.com/book-online" class="btn btn-primary">
                     Book Complimentary Insight Session
                 </a>
             </div>
@@ -1123,13 +1040,14 @@
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
+        // Mobile menu toggle + focus management
         let _previousBodyOverflow = '';
 
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const hamburger = document.getElementById('hamburger');
-            if (!menu || !hamburger) return;
 
             menu.classList.toggle('active');
             const isActive = menu.classList.contains('active');
@@ -1150,8 +1068,9 @@
             }
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
+        // Close mobile menu with ESC
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
                 const menu = document.getElementById('mobileMenu');
                 if (menu && menu.classList.contains('active')) {
                     toggleMenu();
@@ -1159,61 +1078,60 @@
             }
         });
 
-        function debounce(fn, wait = 150) {
-            let t = null;
-            return (...args) => {
-                clearTimeout(t);
-                t = setTimeout(() => fn(...args), wait);
-            };
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+
+        function handleReveal() {
+            const windowHeight = window.innerHeight;
+            const offset = 70;
+
+            revealElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - offset) {
+                    el.classList.add('active');
+                }
+            });
         }
 
-        // NAVBAR SCROLL EFFECT (same behavior as homepage)
-        const nav = document.getElementById('navbar');
-        let lastScrollY = 0;
+        window.addEventListener('scroll', handleReveal);
+        window.addEventListener('load', handleReveal);
 
-        const onScroll = () => {
+        // Nav scroll class
+        const nav = document.getElementById('navbar');
+
+        function handleNavScroll() {
             if (!nav) return;
-            lastScrollY = window.scrollY;
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
-        };
+        }
 
-        let scrollT = null;
-        window.addEventListener('scroll', () => {
-            if (scrollT !== null) cancelAnimationFrame(scrollT);
-            scrollT = requestAnimationFrame(onScroll);
-        });
-        onScroll();
+        window.addEventListener('scroll', handleNavScroll);
+        window.addEventListener('load', handleNavScroll);
 
-        // keep body padded so content doesn't slide under fixed nav
+        // Keep body padding in sync with fixed nav height
         (function syncBodyPaddingWithNav() {
             const navbar = document.getElementById('navbar');
             if (!navbar) return;
 
             function updateBodyPadding() {
                 const height = Math.ceil(navbar.getBoundingClientRect().height);
-                if (document.body.style.paddingTop !== height + 'px') {
-                    document.body.style.paddingTop = height + 'px';
-                }
+                document.body.style.paddingTop = height + 'px';
             }
 
+            updateBodyPadding();
+
             if ('ResizeObserver' in window) {
-                const ro = new ResizeObserver(() => updateBodyPadding());
+                const ro = new ResizeObserver(updateBodyPadding);
                 ro.observe(navbar);
-                window.addEventListener('resize', debounce(updateBodyPadding, 80));
-                updateBodyPadding();
             } else {
-                window.addEventListener('load', updateBodyPadding);
-                window.addEventListener('resize', debounce(updateBodyPadding, 120));
-                window.addEventListener('scroll', debounce(updateBodyPadding, 120));
-                updateBodyPadding();
+                window.addEventListener('resize', updateBodyPadding);
             }
         })();
 
-        // footer year
+        // Year in footer
         const yearSpan = document.getElementById('year');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
