@@ -613,7 +613,51 @@
         }
 
         /* --- ABOUT + MISSION TEASERS (for #mission and #about anchors) --- */
-        
+        .anchor-teaser {
+            padding: 4rem 2rem 1rem;
+        }
+
+        .anchor-teaser-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.03);
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .anchor-teaser h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .anchor-teaser p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .anchor-teaser .kicker {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rust-clay);
+            margin-bottom: 0.4rem;
+        }
+
+        .anchor-teaser .btn-wrapper {
+            justify-content: flex-end;
+        }
+
+        .anchor-teaser .btn-secondary {
+            padding-inline: 2.2rem;
+        }
 
         /* --- FOOTER (MATCH HOMEPAGE / MISSION) --- */
         footer {
