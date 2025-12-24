@@ -658,6 +658,29 @@
         .anchor-teaser .btn-secondary {
             padding-inline: 2.2rem;
         }
+        /* Anchor teaser: align the button column the "grid" way */
+.anchor-teaser-inner .btn-wrapper {
+  justify-self: end;          /* right side on desktop */
+}
+
+/* Mobile: stack + keep everything aligned with the rest of the page */
+@media (max-width: 960px) {
+  .anchor-teaser-inner .btn-wrapper {
+    justify-self: start;      /* left like your text */
+    width: 100%;
+  }
+}
+
+/* Make the white boxes match the same side padding as other sections on mobile */
+@media (max-width: 640px) {
+  .anchor-teaser {
+    padding-inline: 1.5rem;   /* matches your other sections */
+  }
+  .anchor-teaser .container {
+    padding-inline: 0;        /* prevent “double padding” */
+  }
+}
+
 
         /* --- FOOTER (MATCH HOMEPAGE / MISSION) --- */
         footer {
