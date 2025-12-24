@@ -819,6 +819,51 @@
                 padding-inline: 1.75rem;
             }
         }
+
+        /* ===============================
+   MOBILE NORMALIZATION (Services)
+   Match Anchor-Teaser formatting
+   =============================== */
+@media (max-width: 960px) {
+
+  /* Stack plans like the white teaser cards */
+  .decision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Make plan cards behave like anchor-teaser boxes */
+  .service-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.03);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+
+  /* Remove desktop scaling tricks */
+  .service-card.basic {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Make buttons align like teaser buttons */
+  .service-card .btn-wrapper,
+  .cta-section .btn-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Prevent buttons from pushing layout sideways */
+  .service-card .btn,
+  .cta-section .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
     </style>
 </head>
 <body>
